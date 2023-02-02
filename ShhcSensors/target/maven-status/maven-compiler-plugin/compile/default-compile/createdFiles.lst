@@ -1,0 +1,14 @@
+com\example\demo3\model\PulseOxygen.class
+com\example\demo3\model\HeartRate.class
+com\example\demo3\model\Glucose.class
+com\example\demo3\Demo3Application.class
+com\example\demo3\resource\BloodPressureResource.class
+com\example\demo3\model\AirFlow.class
+com\example\demo3\resource\GlucoseResource.class
+com\example\demo3\resource\TemperatureResource.class
+com\example\demo3\model\BloodPressure.class
+com\example\demo3\model\TestSensor.class
+com\example\demo3\resource\PulseOxygenResource.class
+com\example\demo3\model\Temperature.class
+com\example\demo3\resource\AirFlowResource.class
+com\example\demo3\resource\HeartRateResource.class
