@@ -1,6 +1,11 @@
 package br.unesp.rc.shhc.view;
 
 import br.unesp.rc.shhc.utils.FrameUtils;
+import br.unesp.rc.shhc.utils.CustomHttpClientUtils;
+import br.unesp.shhc.gson.utils.GsonUtils;
+import br.unesp.shhc.model.Temperature;
+
+
 import java.io.IOException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -383,7 +388,7 @@ public class ControlPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = (int) jSTemperature.getValue();
         System.out.println("Temperature Value: " + value);
-        setTValue(value);
+        setTemperatureValue(value);
     }//GEN-LAST:event_jSTemperatureStateChanged
 
     private void jSHeartRateStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSHeartRateStateChanged
@@ -478,8 +483,14 @@ public class ControlPanel extends javax.swing.JFrame {
     private javax.swing.JSpinner jSTemperature;
     // End of variables declaration//GEN-END:variables
 
-    private static void setTValue(int temperatura) {
-       
+    private static void setTemperatureValue(int temperatura){
+        Temperature temp = new Temperature();
+        temp.setValue(temperatura);
+ 
+        String json = GsonUtils.objetoToJson(temp);
+        
+        System.out.println("JSON: \n" + json);
+        CustomHttpClientUtils.setValue(json);
     }
 
     private static void setHRValue(int hrate) {

@@ -17,6 +17,16 @@
             <version>4.5.13</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>br.unesp.shhc.modelshhcmaven</groupId>
+            <artifactId>ModelSHHCMaven</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>br.unesp.shhc.gsonutilsmaven</groupId>
+            <artifactId>GsonUtilsMaven</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
