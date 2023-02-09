@@ -556,7 +556,7 @@ public class ControlPanel extends javax.swing.JFrame {
 
     private static void setGlValue(int glucoseT) throws IOException {
          String URL = "http://localhost:8084/shhc/Glucose/update";
-        Glucose glu = new Glucose(glucoseT, "Online", "1");
+        Glucose glu = new Glucose(glucoseT, "Online", "2");
 //        temp.setValue(temperatura);
 //        temp.setStatus("Online");
 //        temp.setID("1");
