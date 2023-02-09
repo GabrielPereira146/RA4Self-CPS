@@ -6,8 +6,8 @@ public class AirFlow {
     private String status;
     private String ID;
 
-    public AirFlow(int value, String status, String ID) {
-        this.value = value;
+    public AirFlow(int airflow, String status, String ID) {
+        this.value = airflow;
         this.status = status;
         this.ID = ID;
     }

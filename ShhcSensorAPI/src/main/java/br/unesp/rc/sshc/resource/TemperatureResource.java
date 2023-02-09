@@ -27,20 +27,20 @@ public class TemperatureResource {
     @PutMapping("/update")
     public void updateTemperature(@RequestBody Temperature temperature) {
         System.out.println("Value to update: " + temperature);
-        this.temp = temperature;        
+        temp = temperature;        
         this.print();
     }
 
     @PostMapping("/save")
     public void save(@RequestBody Temperature temperature) {
         System.out.println("Value to save: " + temperature);                   
-        this.temp = temperature;        
+        temp = temperature;        
         this.print();
     }
 
     private void print(){
         System.out.println("------------------------------------------");
-        System.out.println(this.temp);
+        System.out.println(temp);
         System.out.println("------------------------------------------");
     }
 }
