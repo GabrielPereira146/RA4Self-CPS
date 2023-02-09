@@ -1,7 +1,7 @@
-br\unesp\shhc\model\Temperature.class
-br\unesp\shhc\model\BloodPressure.class
-br\unesp\shhc\model\AirFlow.class
-br\unesp\shhc\model\Glucose.class
-br\unesp\shhc\model\PulseOxygen.class
-br\unesp\shhc\model\HeartRate.class
-br\unesp\shhc\model\TestSensor.class
+br\unesp\rc\shhc\model\Temperature.class
+br\unesp\rc\shhc\model\PulseOxygen.class
+br\unesp\rc\shhc\model\BloodPressure.class
+br\unesp\rc\shhc\model\HeartRate.class
+br\unesp\rc\shhc\model\AirFlow.class
+br\unesp\rc\shhc\model\TestSensor.class
+br\unesp\rc\shhc\model\Glucose.class

@@ -1,17 +1,13 @@
 package br.unesp.rc.shhc.view;
 
+import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
 import br.unesp.rc.shhc.utils.FrameUtils;
-import br.unesp.rc.shhc.utils.CustomHttpClientUtils;
-import br.unesp.shhc.gson.utils.GsonUtils;
-import br.unesp.shhc.model.Temperature;
-
-
+import br.unesp.rc.gson.utils.GsonUtils;
+import br.unesp.rc.shhc.model.Temperature;
 import java.io.IOException;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class ControlPanel extends javax.swing.JFrame {
 
@@ -237,7 +233,7 @@ public class ControlPanel extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/unesp/rc/shhc/view/images/corpo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/corpo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -253,7 +249,7 @@ public class ControlPanel extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Sensors"));
@@ -385,10 +381,14 @@ public class ControlPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSTemperatureStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSTemperatureStateChanged
-        // TODO add your handling code here:
-        int value = (int) jSTemperature.getValue();
-        System.out.println("Temperature Value: " + value);
-        setTemperatureValue(value);
+        try {
+            // TODO add your handling code here:
+            int value = (int) jSTemperature.getValue();
+            System.out.println("Temperature Value: " + value);
+            setTemperatureValue(value);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jSTemperatureStateChanged
 
     private void jSHeartRateStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSHeartRateStateChanged
@@ -483,14 +483,17 @@ public class ControlPanel extends javax.swing.JFrame {
     private javax.swing.JSpinner jSTemperature;
     // End of variables declaration//GEN-END:variables
 
-    private static void setTemperatureValue(int temperatura){
-        Temperature temp = new Temperature();
-        temp.setValue(temperatura);
+    private static void setTemperatureValue(int temperatura) throws IOException{
+        String URL = "http://localhost:8084/shhc/Temperature/update";
+        Temperature temp = new Temperature(temperatura, "Online", "1");
+//        temp.setValue(temperatura);
+//        temp.setStatus("Online");
+//        temp.setID("1");
  
-        String json = GsonUtils.objetoToJson(temp);
+        String json = GsonUtils.objetoToJson(temp);        
+        System.out.println("JSON: " + json);
         
-        System.out.println("JSON: \n" + json);
-        CustomHttpClientUtils.setValue(json);
+        CustomHttpClientUtils.setValueByHttpPut(URL, json);
     }
 
     private static void setHRValue(int hrate) {
