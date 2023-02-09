@@ -3,6 +3,8 @@ package br.unesp.rc.shhc.view;
 import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
 import br.unesp.rc.shhc.utils.FrameUtils;
 import br.unesp.rc.gson.utils.GsonUtils;
+import br.unesp.rc.shhc.model.Glucose;
+import br.unesp.rc.shhc.model.HeartRate;
 import br.unesp.rc.shhc.model.Temperature;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -395,13 +397,21 @@ public class ControlPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
         int value = (int) jSHeartRate.getValue();
         System.out.println("HeartRate Value: " + value);
-        setHRValue(value);
+        try {
+            setHRValue(value);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jSHeartRateStateChanged
 
     private void jSGlucoseStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSGlucoseStateChanged
         int value = (int) jSGlucose.getValue();
         System.out.println("Glucose Value: " + value);
-        setGlValue(value);
+        try {
+            setGlValue(value);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jSGlucoseStateChanged
 
     private void jSPulseOxygenStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSPulseOxygenStateChanged
@@ -496,11 +506,31 @@ public class ControlPanel extends javax.swing.JFrame {
         CustomHttpClientUtils.setValueByHttpPut(URL, json);
     }
 
-    private static void setHRValue(int hrate) {
+    private static void setHRValue(int heartrate) throws IOException {
+        String URL = "http://localhost:8084/shhc/HeartRate/update";
+        HeartRate hr = new HeartRate(heartrate, "Online", "1");
+//        temp.setValue(temperatura);
+//        temp.setStatus("Online");
+//        temp.setID("1");
+ 
+        String json = GsonUtils.objetoToJson(hr);        
+        System.out.println("JSON: " + json);
+        
+        CustomHttpClientUtils.setValueByHttpPut(URL, json);
 
     }
 
-    private static void setGlValue(int glucoseT) {
+    private static void setGlValue(int glucoseT) throws IOException {
+         String URL = "http://localhost:8084/shhc/Glucose/update";
+        Glucose glu = new Glucose(glucoseT, "Online", "1");
+//        temp.setValue(temperatura);
+//        temp.setStatus("Online");
+//        temp.setID("1");
+ 
+        String json = GsonUtils.objetoToJson(glu);        
+        System.out.println("JSON: " + json);
+        
+        CustomHttpClientUtils.setValueByHttpPut(URL, json);
 
     }
 
