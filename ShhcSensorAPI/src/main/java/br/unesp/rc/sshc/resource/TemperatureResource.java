@@ -15,7 +15,7 @@ public class TemperatureResource {
     private static Temperature temp;
 
     static {
-        temp = new Temperature(36, "Online", "1");
+        temp = new Temperature(36, "Offline", "1");
     }
 
     @GetMapping("/")

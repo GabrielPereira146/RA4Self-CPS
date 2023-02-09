@@ -12,6 +12,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+/**
+ * 
+ * @author frank
+ */
 public class FrameUtils {
 
     private FrameUtils() {
