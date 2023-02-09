@@ -576,7 +576,7 @@ public class ControlPanel extends javax.swing.JFrame {
     }
 
     private static void setAFValue(int airflow) throws IOException {
-        String URL = "http://localhost:8084/shhc/Temperature/update";
+        String URL = "http://localhost:8084/shhc/AirFlow/update";
         AirFlow air = new AirFlow(airflow, "Online", "1");
         String json = GsonUtils.objetoToJson(air);
         CustomHttpClientUtils.setValueByHttpPut(URL, json);
