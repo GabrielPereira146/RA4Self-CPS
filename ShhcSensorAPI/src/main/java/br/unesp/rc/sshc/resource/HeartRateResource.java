@@ -30,20 +30,20 @@ public class HeartRateResource {
     @PutMapping("/update")
     public void updateHeartRate(@RequestBody HeartRate heartrate) {
         System.out.println("Value to update: " + heartrate);
-        this.hr = heartrate;        
+        hr = heartrate;        
         this.print();
     }
     
     @PostMapping("/save")
     public void save(@RequestBody HeartRate heartrate) {
         System.out.println("Value to save: " + heartrate);                   
-        this.hr = heartrate;        
+        hr = heartrate;        
         this.print();
     }
     
     private void print(){
         System.out.println("------------------------------------------");
-        System.out.println(this.hr);
+        System.out.println(hr);
         System.out.println("------------------------------------------");
     }
 }

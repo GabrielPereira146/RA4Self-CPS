@@ -30,20 +30,20 @@ public class GlucoseResource {
     @PutMapping("/update")
     public void updateGlucose(@RequestBody Glucose glucose) {
         System.out.println("Value to update: " + glucose);
-        this.glu = glucose;        
+        glu = glucose;        
         this.print();
     }
     
     @PostMapping("/save")
     public void save(@RequestBody Glucose glucose) {
         System.out.println("Value to save: " + glucose);                   
-        this.glu = glucose;        
+        glu = glucose;        
         this.print();
     }
     
     private void print(){
         System.out.println("------------------------------------------");
-        System.out.println(this.glu);
+        System.out.println(glu);
         System.out.println("------------------------------------------");
     }
 }
