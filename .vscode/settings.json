@@ -15,5 +15,6 @@
         "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx-swt.jar"
     ],
     "java.configuration.updateBuildConfiguration": "interactive",
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.dependency.packagePresentation": "hierarchical"
 }
