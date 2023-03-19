@@ -1,7 +1,7 @@
 {
     "java.project.sourcePaths": [
-        "JavafxApp/src",
-        "paneljavafx/src/main/java/br/unesp/rc"
+        "paneljavafx/src/main/java/br/unesp/rc",
+        "controlpaneljavafx/src/main/java/br/unesp/rc/shhc/controlpanel"
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
