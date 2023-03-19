@@ -648,26 +648,14 @@ public class ControlPanel extends javax.swing.JFrame {
         private static void setTemperatureValue(int temperatura) throws IOException {
                 String URL = "http://localhost:8084/shhc/Temperature/update";
                 Temperature temp = new Temperature(temperatura, "Online", "1");
-                // temp.setValue(temperatura);
-                // temp.setStatus("Online");
-                // temp.setID("1");
-
                 String json = GsonUtils.objetoToJson(temp);
-                System.out.println("JSON: " + json);
-
                 CustomHttpClientUtils.setValueByHttpPut(URL, json);
         }
 
         private static void setHRValue(int heartrate) throws IOException {
                 String URL = "http://localhost:8084/shhc/HeartRate/update";
                 HeartRate hr = new HeartRate(heartrate, "Online", "1");
-                // temp.setValue(temperatura);
-                // temp.setStatus("Online");
-                // temp.setID("1");
-
                 String json = GsonUtils.objetoToJson(hr);
-                System.out.println("JSON: " + json);
-
                 CustomHttpClientUtils.setValueByHttpPut(URL, json);
 
         }
@@ -675,13 +663,7 @@ public class ControlPanel extends javax.swing.JFrame {
         private static void setGlValue(int glucoseT) throws IOException {
                 String URL = "http://localhost:8084/shhc/Glucose/update";
                 Glucose glu = new Glucose(glucoseT, "Online", "2");
-                // temp.setValue(temperatura);
-                // temp.setStatus("Online");
-                // temp.setID("1");
-
                 String json = GsonUtils.objetoToJson(glu);
-                System.out.println("JSON: " + json);
-
                 CustomHttpClientUtils.setValueByHttpPut(URL, json);
 
         }

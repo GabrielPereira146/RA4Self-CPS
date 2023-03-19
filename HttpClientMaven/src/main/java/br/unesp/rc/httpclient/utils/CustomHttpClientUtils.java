@@ -20,7 +20,7 @@ public class CustomHttpClientUtils {
     public static void setValueByHttpPut(String url, String json) throws UnsupportedEncodingException, IOException {
         //final String URL = "http://localhost:8084/shhc/Temperature/update";
         System.out.println("URL: " + url);
-
+        System.out.println("JSON: " + json);
         HttpPut httpPut = new HttpPut(url);
         StringEntity entity = new StringEntity(json);
         httpPut.setEntity(entity);        

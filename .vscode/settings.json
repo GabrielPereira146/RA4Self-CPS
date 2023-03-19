@@ -1,0 +1,19 @@
+{
+    "java.project.sourcePaths": [
+        "JavafxApp/src",
+        "paneljavafx/src/main/java/br/unesp/rc"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx.base.jar",
+        "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx.controls.jar",
+        "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx.fxml.jar",
+        "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx.graphics.jar",
+        "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx.media.jar",
+        "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx.swing.jar",
+        "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx.web.jar",
+        "d:\\Downloads\\javafx-sdk-19.0.2.1\\lib\\javafx-swt.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
+}
