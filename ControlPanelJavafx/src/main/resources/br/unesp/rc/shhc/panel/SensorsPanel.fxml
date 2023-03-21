@@ -163,7 +163,7 @@
                         <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="12" max="30" min="0" />
                   </valueFactory>
                   </Spinner>
-                  <Spinner layoutX="51.0" layoutY="49.0" prefHeight="30.0" prefWidth="23.0" styleClass="split-arrows-vertical" stylesheets="@Style.css">
+                  <Spinner fx:id="spinnerDiastolicBP" layoutX="51.0" layoutY="49.0" prefHeight="30.0" prefWidth="23.0" styleClass="split-arrows-vertical" stylesheets="@Style.css">
                    <valueFactory>
                         <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="8" max="30" min="0" />
                   </valueFactory>

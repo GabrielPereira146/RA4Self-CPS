@@ -1,18 +1,27 @@
 package br.unesp.rc.shhc.panel;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
+import br.unesp.rc.gson.utils.GsonUtils;
+import br.unesp.rc.shhc.model.Temperature;
+import br.unesp.rc.shhc.model.Glucose;
+import br.unesp.rc.shhc.model.AirFlow;
+import br.unesp.rc.shhc.model.PulseOxygen;
+import br.unesp.rc.shhc.model.BloodPressure;
+import br.unesp.rc.shhc.model.HeartRate;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.AnchorPane;
 
-
-public class Controller implements Initializable  {
+public class Controller implements Initializable {
 
     @FXML
     private Spinner<Integer> SpinnerAir;
@@ -33,71 +42,150 @@ public class Controller implements Initializable  {
     private Spinner<Integer> spinnerSystolicBP;
 
     @FXML
-    private Spinner<Integer> spinnerTemperature;
+    private Spinner<Integer> spinnerDiastolicBP;
 
     @FXML
-    private Label teste;
+    private Spinner<Integer> spinnerTemperature;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+
         spinnerTemperature.valueProperty().addListener(new ChangeListener<Integer>() {
 
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int temperature = spinnerTemperature.getValue();
                 System.out.println("Temperature Value: " + temperature);
-                //String URL = "http://localhost:8084/shhc/Temperature/update";
+                String URL = "http://localhost:8084/shhc/Temperature/update";
 
-                //Temperature temp = new Temperature(temperature, "Online", "1");
-                //String json = GsonUtils.objetoToJson(temp);
-                //CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                Temperature temp = new Temperature(temperature, "Online", "1");
+                String json = GsonUtils.objetoToJson(temp);
+                try {
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
-            
+
         });
 
         SpinnerAir.valueProperty().addListener(new ChangeListener<Integer>() {
 
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
-               // value = spinnerTemperature.getValue();
-              //  System.out.println(value);
-                
+                int airflow = SpinnerAir.getValue();
+                System.out.println(airflow);
+                String URL = "http://localhost:8084/shhc/AirFlow/update";
+                AirFlow air = new AirFlow(airflow, "Online", "4");
+                String json = GsonUtils.objetoToJson(air);
+                try {
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
             }
-            
+
         });
 
         SpinnerGlucose.valueProperty().addListener(new ChangeListener<Integer>() {
 
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
-              //  value = spinnerTemperature.getValue();
-               // System.out.println(value);
-                
+                int glucose = SpinnerGlucose.getValue();
+                System.out.println(glucose);
+                String URL = "http://localhost:8084/shhc/Glucose/update";
+                Glucose glu = new Glucose(glucose, "Online", "2");
+                String json = GsonUtils.objetoToJson(glu);
+                try {
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
-            
+
         });
 
         SpinnerHeart.valueProperty().addListener(new ChangeListener<Integer>() {
 
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
-               // value = spinnerTemperature.getValue();
-               // System.out.println(value);
-                
+                int heartrate = SpinnerHeart.getValue();
+                System.out.println(heartrate);
+                String URL = "http://localhost:8084/shhc/HeartRate/update";
+                HeartRate hr = new HeartRate(heartrate, "Online", "5");
+                String json = GsonUtils.objetoToJson(hr);
+                try {
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
             }
-            
+
         });
 
         SpinnerOxygen.valueProperty().addListener(new ChangeListener<Integer>() {
 
             @Override
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
-               // value = spinnerTemperature.getValue();
-               // System.out.println(value);
-                
+                int oxygenP = SpinnerOxygen.getValue();
+                System.out.println(oxygenP);
+                String URL = "http://localhost:8084/shhc/PulseOxygen/update";
+                AirFlow oxyg = new AirFlow(oxygenP, "Online", "3");
+                String json = GsonUtils.objetoToJson(oxyg);
+                try {
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
             }
+
+        });
+   
+        spinnerSystolicBP.valueProperty().addListener(new ChangeListener<Integer>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                int systolic = spinnerSystolicBP.getValue();
+                int diastolic = spinnerDiastolicBP.getValue();
+                String URL = "http://localhost:8084/shhc/BloodPressure/update";
+                BloodPressure bloodP = new BloodPressure(diastolic, systolic, "Online", "6");
+                String json = GsonUtils.objetoToJson(bloodP);
+                try {
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
             
+            
+        });
+   
+        spinnerDiastolicBP.valueProperty().addListener(new ChangeListener<Integer>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                int systolic = spinnerSystolicBP.getValue();
+                int diastolic = spinnerDiastolicBP.getValue();
+                String URL = "http://localhost:8084/shhc/BloodPressure/update";
+                BloodPressure bloodP = new BloodPressure(diastolic, systolic, "Online", "6");
+                String json = GsonUtils.objetoToJson(bloodP);
+                try {
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         });
     }
 

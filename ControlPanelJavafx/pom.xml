@@ -20,6 +20,24 @@
             <artifactId>javafx-fxml</artifactId>
             <version>19.0.2.1</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>br.unesp.rc.shhc</groupId>
+            <artifactId>HttpClientMaven</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>br.unesp.rc.shhc</groupId>
+            <artifactId>GsonUtilsMaven</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>br.unesp.rc.shhc</groupId>
+            <artifactId>ModelSHHCMaven</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -37,8 +55,6 @@
                 <version>0.0.6</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running -->
-                        <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>br.unesp.rc.shhc.panel.App</mainClass>

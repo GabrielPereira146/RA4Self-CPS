@@ -1,0 +1,36 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "ControlPanel",
+            "request": "launch",
+            "mainClass": "br.unesp.rc.shhc.view.ControlPanel",
+            "projectName": "ControlPanelMaven"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "br.unesp.rc.shhc.panel.App",
+            "projectName": "ControlPanelJavafx",
+            "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "SshcApplication",
+            "request": "launch",
+            "mainClass": "br.unesp.rc.sshc.SshcApplication",
+            "projectName": "ShhcSensorAPI"
+        }
+    ]
+}
