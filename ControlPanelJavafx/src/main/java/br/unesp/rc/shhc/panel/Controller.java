@@ -1,7 +1,6 @@
 package br.unesp.rc.shhc.panel;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -136,7 +135,7 @@ public class Controller implements Initializable {
                 int oxygenP = SpinnerOxygen.getValue();
                 System.out.println(oxygenP);
                 String URL = "http://localhost:8084/shhc/PulseOxygen/update";
-                AirFlow oxyg = new AirFlow(oxygenP, "Online", "3");
+                PulseOxygen oxyg = new PulseOxygen(oxygenP, "Online", "3");
                 String json = GsonUtils.objetoToJson(oxyg);
                 try {
                     CustomHttpClientUtils.setValueByHttpPut(URL, json);
