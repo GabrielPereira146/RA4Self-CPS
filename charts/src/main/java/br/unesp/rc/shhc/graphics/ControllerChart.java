@@ -1,5 +1,6 @@
 package br.unesp.rc.shhc.graphics;
 
+import br.unesp.rc.gson.utils.GsonUtils;
 import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
 import br.unesp.rc.shhc.model.Temperature;
 
@@ -7,8 +8,6 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.ResourceBundle;
-
-import com.google.gson.Gson;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -25,26 +24,25 @@ public class ControllerChart implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+
         String url = "http://localhost:8084/shhc/Temperature/";
         AnimationTimer loop = new AnimationTimer() {
-        Temperature temperature = new Temperature();
+            Temperature temperature;
+
             @Override
             public void handle(long now) {
                 try {
                     String json = CustomHttpClientUtils.getValueByHttp(url);
-                    temperature = new Gson().fromJson(json, Temperature.class);
+                    temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
                     updateChart(temperature.getValue());
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
-    
                     e.printStackTrace();
                 }
 
             }
         };
         loop.start();
-  
 
     }
 
