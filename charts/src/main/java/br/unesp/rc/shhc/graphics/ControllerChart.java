@@ -5,8 +5,6 @@ import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
 import br.unesp.rc.shhc.model.Temperature;
 
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.ResourceBundle;
 
 import javafx.animation.AnimationTimer;
@@ -17,52 +15,55 @@ import javafx.scene.chart.XYChart;
 
 public class ControllerChart implements Initializable {
 
-    Queue<Integer> queue = new LinkedList<>();
-
     @FXML
     private LineChart<String, Number> chartTemperature;
+
+    @FXML
+    private LineChart<String, Number> chartHeartRate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        String url = "http://localhost:8084/shhc/Temperature/";
+
+        XYChart.Series<String, Number> TempSeries = new XYChart.Series<String, Number>();
+        chartTemperature.getData().add(TempSeries);
+        chartTemperature.setLegendVisible(false);
+
+        // Cria o loop de atualização do gráfico
         AnimationTimer loop = new AnimationTimer() {
-            Temperature temperature;
+            private long lastUpdate = 0;
 
             @Override
             public void handle(long now) {
-                try {
+                // o loop executa uma vez a cada 2 segundos
+                if (now - lastUpdate >= 2_000_000_000L) {
+
+                    // Insere um novo ponto de dados na série de Temperatura
+                    String url = "http://localhost:8084/shhc/Temperature/";
+                    Temperature temperature;
                     String json = CustomHttpClientUtils.getValueByHttp(url);
                     temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
-                    updateChart(temperature.getValue());
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                    updateChart(temperature.getValue(), TempSeries);
 
+                    // Atualiza o lastUpdate para o tempo atual
+                    lastUpdate = now;
+                }
             }
         };
         loop.start();
 
     }
 
-    public void updateChart(int temperature) {
-        XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
-        if (queue.size() < 10) {
-            queue.offer(temperature);
-        } else {
-
-            queue.poll();
-            queue.offer(temperature);
+    public void updateChart(int value, XYChart.Series<String, Number> series) {
+        int y = 0;
+        if(series.getData().size()>0){
+            y = Integer.parseInt(series.getData().get(series.getData().size() - 1).getXValue());
         }
-        chartTemperature.getData().clear();
 
-        int position = 0;
-        for (Integer elemento : queue) {
-            series.getData().add(new XYChart.Data<String, Number>(String.valueOf(position), elemento));
-            position++;
+        series.getData().add(new XYChart.Data<String, Number>(String.valueOf(y+1), value));
+        if (series.getData().size() > 10) {
+            series.getData().remove(0);
         }
-        chartTemperature.getData().add(series);
-
+       
     }
 }

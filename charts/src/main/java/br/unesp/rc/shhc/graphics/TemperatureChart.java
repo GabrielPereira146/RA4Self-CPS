@@ -11,7 +11,9 @@ import javafx.stage.Stage;
  */
 public class TemperatureChart extends Application {
 
-    public void start(Stage stage) throws Exception {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("chartTemperature.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
@@ -21,5 +23,6 @@ public class TemperatureChart extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 
 }
