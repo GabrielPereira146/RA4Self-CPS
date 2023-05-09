@@ -18,8 +18,6 @@ public class ControllerChart implements Initializable {
     @FXML
     private LineChart<String, Number> chartTemperature;
 
-    @FXML
-    private LineChart<String, Number> chartHeartRate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

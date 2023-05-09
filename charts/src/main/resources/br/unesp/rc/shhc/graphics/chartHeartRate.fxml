@@ -37,7 +37,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" fillWidth="false" prefHeight="565.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.rc.shhc.graphics.ControllerChart">
+<VBox alignment="CENTER" fillWidth="false" prefHeight="565.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <LineChart fx:id="chartHeartRate" animated="false" prefHeight="445.0" prefWidth="635.0" title="Sensor Heart Rate" VBox.vgrow="NEVER">
         <xAxis>
