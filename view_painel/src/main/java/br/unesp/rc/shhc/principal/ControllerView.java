@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -52,14 +53,25 @@ public class ControllerView implements Initializable {
     @FXML
     private TabPane tabPane;
 
+
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
         Tab_name1.setText(label_Pac1.getText());
+        button_Pac1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                tabPane.getSelectionModel().select(tab_pac1);
+            }
+        });
 
         button_Add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("NewPatient.fxml"));
+                //Pane PatientDialogPane = fxmlLoader.load();
                 //Cria a label do paciente
                 Label label = new Label("PACIENTE");
                 label.setLayoutX(label_add.getLayoutX());
