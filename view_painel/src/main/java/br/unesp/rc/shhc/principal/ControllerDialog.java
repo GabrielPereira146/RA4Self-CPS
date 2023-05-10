@@ -9,9 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-
-
+import br.unesp.rc.shhc.model.Temperature;
 
 public class ControllerDialog implements Initializable {
 
@@ -43,7 +41,7 @@ public class ControllerDialog implements Initializable {
         float weight = Float.valueOf(textWeight.getText());
         int age = Integer.valueOf(textAge.getText());
         
-        Patient paciente = new Patient(firstName, lastName, height, weight, age);
+        //Patient paciente = new Patient(firstName, lastName, height, weight, age);
 
         closeStage(event);
     }
