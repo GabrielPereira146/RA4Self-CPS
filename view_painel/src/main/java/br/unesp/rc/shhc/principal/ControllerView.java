@@ -1,7 +1,7 @@
 
 package br.unesp.rc.shhc.principal;
 
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,13 +9,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +26,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+
+
+
 
 public class ControllerView implements Initializable {
 
@@ -53,8 +59,9 @@ public class ControllerView implements Initializable {
     @FXML
     private TabPane tabPane;
 
+    @FXML
+    private DialogPane dialogPane;
 
-    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -68,11 +75,38 @@ public class ControllerView implements Initializable {
 
         button_Add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("NewPatient.fxml"));
-                //Pane PatientDialogPane = fxmlLoader.load();
-                //Cria a label do paciente
+            public void handle(ActionEvent event) { 
+               /* DialogMode mode;
+
+                mode = DialogMode.ADD;
+                String dialogTitle = "ADD Patient";
+                Patient newPatient = new Patient();
+
+                try{
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("NewPatient.fxml"));
+                    DialogPane patientDialogPane = fxmlLoader.load();
+
+                    Dialog<ButtonType> dialog = new Dialog<>();
+                    dialog.setDialogPane(patientDialogPane);
+                    dialog.setTitle(dialogTitle);
+
+                    Optional<ButtonType> clickedButton = dialog.showAndWait;
+
+                    if(clickedButton.get() == ButtonType.OK){
+                        System.out.println("Deu certo caraio");
+
+                    }
+
+
+                }catch(IOException e){
+                        e.printStackTrace();
+                }
+ */
+
+
+                // Pane PatientDialogPane = fxmlLoader.load();
+                // Cria a label do paciente
                 Label label = new Label("PACIENTE");
                 label.setLayoutX(label_add.getLayoutX());
                 label.setLayoutY(label_add.getLayoutY());
@@ -84,15 +118,15 @@ public class ControllerView implements Initializable {
                 // cria o novo guia com os graficos
                 Tab newTab = new Tab(label.getText());
                 tabPane.getTabs().add(newTab);
-                
+
                 // cria o botão do novo paciente
                 newButtonPaciente(newTab);
-               
+
             }
         });
     }
 
-    public void newButtonPaciente(Tab newTab){
+    public void newButtonPaciente(Tab newTab) {
         Button button = new Button("");
 
         Image image = new Image(getClass().getResourceAsStream("icons/profile.png"));
@@ -111,7 +145,6 @@ public class ControllerView implements Initializable {
         button.setBackground(background);
 
         Anchor_Pac.getChildren().add(button);
-
 
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override

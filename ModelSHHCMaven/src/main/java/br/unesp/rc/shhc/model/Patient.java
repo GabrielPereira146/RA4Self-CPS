@@ -1,4 +1,4 @@
-package main.java.br.unesp.rc.shhc.model;
+package br.unesp.rc.shhc.model;
 
 public class Patient {
 

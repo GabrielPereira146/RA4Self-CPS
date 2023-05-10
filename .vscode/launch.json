@@ -12,7 +12,6 @@
             "projectName": "view_painel",
             "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
         },
-
         {
             "type": "java",
             "name": "TemperatureChart",
