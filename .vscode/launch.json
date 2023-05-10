@@ -6,6 +6,15 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "br.unesp.rc.shhc.principal.App",
+            "projectName": "view_painel",
+            "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
+        },
+
+        {
+            "type": "java",
             "name": "TemperatureChart",
             "request": "launch",
             "mainClass": "br.unesp.rc.shhc.graphics.TemperatureChart",
