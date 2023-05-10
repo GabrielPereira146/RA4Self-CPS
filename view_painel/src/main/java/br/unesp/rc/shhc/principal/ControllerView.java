@@ -9,10 +9,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
@@ -26,6 +27,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 
@@ -62,6 +65,19 @@ public class ControllerView implements Initializable {
     @FXML
     private DialogPane dialogPane;
 
+    
+    public void onOpenDialog() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
+        Parent parent = fxmlLoader.load();
+       
+        Scene scene = new Scene(parent, 400, 350);
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -76,35 +92,13 @@ public class ControllerView implements Initializable {
         button_Add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) { 
-               /* DialogMode mode;
 
-                mode = DialogMode.ADD;
-                String dialogTitle = "ADD Patient";
-                Patient newPatient = new Patient();
-
-                try{
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("NewPatient.fxml"));
-                    DialogPane patientDialogPane = fxmlLoader.load();
-
-                    Dialog<ButtonType> dialog = new Dialog<>();
-                    dialog.setDialogPane(patientDialogPane);
-                    dialog.setTitle(dialogTitle);
-
-                    Optional<ButtonType> clickedButton = dialog.showAndWait;
-
-                    if(clickedButton.get() == ButtonType.OK){
-                        System.out.println("Deu certo caraio");
-
-                    }
-
-
-                }catch(IOException e){
-                        e.printStackTrace();
+                try {
+                    onOpenDialog();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
- */
-
-
+                
                 // Pane PatientDialogPane = fxmlLoader.load();
                 // Cria a label do paciente
                 Label label = new Label("PACIENTE");
