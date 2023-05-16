@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import br.unesp.rc.shhc.model.Temperature;
+
 
 public class ControllerDialog implements Initializable {
 

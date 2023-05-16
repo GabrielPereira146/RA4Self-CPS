@@ -13,6 +13,7 @@ import br.unesp.rc.shhc.model.PulseOxygen;
 import br.unesp.rc.shhc.model.BloodPressure;
 import br.unesp.rc.shhc.model.HeartRate;
 
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;

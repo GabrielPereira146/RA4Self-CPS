@@ -20,8 +20,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>19.0.2.1</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>br.unesp.rc.shhc.model</groupId>
+            <artifactId>SHHCMavenModel</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>br.unesp.rc.shhc</groupId>
             <artifactId>HttpClientMaven</artifactId>
@@ -31,12 +34,6 @@
             <groupId>br.unesp.rc.shhc</groupId>
             <artifactId>GsonUtilsMaven</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>br.unesp.rc.shhc</groupId>
-            <artifactId>ModelSHHCMaven</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>

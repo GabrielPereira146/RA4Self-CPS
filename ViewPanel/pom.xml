@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>br.unesp.rc.shhc.principal</groupId>
-    <artifactId>view_painel</artifactId>
+    <artifactId>ViewPanel</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -13,18 +13,17 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>13</version>
+            <version>19.0.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>13</version>
+            <version>19.0.2.1</version>
         </dependency>
-         <dependency>
-            <groupId>br.unesp.rc.shhc</groupId>
-            <artifactId>ModelSHHCMaven</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
+        <dependency>
+            <groupId>br.unesp.rc.shhc.model</groupId>
+            <artifactId>SHHCMavenModel</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>
