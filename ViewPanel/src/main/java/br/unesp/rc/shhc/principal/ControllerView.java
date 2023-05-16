@@ -1,11 +1,12 @@
 
 package br.unesp.rc.shhc.principal;
 
-
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import br.unesp.rc.shhc.model.Patient;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
@@ -29,9 +33,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-
-
+import javafx.stage.StageStyle;
 
 public class ControllerView implements Initializable {
 
@@ -65,21 +67,33 @@ public class ControllerView implements Initializable {
     @FXML
     private DialogPane dialogPane;
 
-    
+    Patient newPaciente = new Patient();
+
+    ArrayList<String> titleList = new ArrayList();
+
     public void onOpenDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
         Parent parent = fxmlLoader.load();
-       
+
         Scene scene = new Scene(parent, 400, 350);
         Stage stage = new Stage();
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.showAndWait();
+
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
+        titleList.add("PulseOxygen");
+        titleList.add("HeartRate");
+        titleList.add("Temperature");
+        titleList.add("AirFlow");
+        titleList.add("Glucose");
+        titleList.add("BloodPressure");
 
         Tab_name1.setText(label_Pac1.getText());
         button_Pac1.setOnAction(new EventHandler<ActionEvent>() {
@@ -91,30 +105,12 @@ public class ControllerView implements Initializable {
 
         button_Add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) { 
-
+            public void handle(ActionEvent event) {
                 try {
                     onOpenDialog();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                
-                // Pane PatientDialogPane = fxmlLoader.load();
-                // Cria a label do paciente
-                Label label = new Label("PACIENTE");
-                label.setLayoutX(label_add.getLayoutX());
-                label.setLayoutY(label_add.getLayoutY());
-                label.setAlignment(Pos.CENTER);
-                label.setPrefWidth(93);
-                label.setPrefHeight(17);
-                Anchor_Pac.getChildren().add(label);
-
-                // cria o novo guia com os graficos
-                Tab newTab = new Tab(label.getText());
-                tabPane.getTabs().add(newTab);
-
-                // cria o botão do novo paciente
-                newButtonPaciente(newTab);
 
             }
         });
@@ -150,6 +146,59 @@ public class ControllerView implements Initializable {
         // ajusta o botão de add para a posição correta
         button_Add.setLayoutY(button_Add.getLayoutY() + 100);
         label_add.setLayoutY(label_add.getLayoutY() + 100);
+    }
+
+    public void newTabPaciente(Tab newTab, Patient paciente) {
+        int j = 0;
+        tabPane.getTabs().add(newTab);
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setPrefWidth(Anchor_Pac.getPrefWidth());
+        for (int i = 0; i < 6; i++) {
+            // defining the axes
+            CategoryAxis xAxis = new CategoryAxis();
+            NumberAxis yAxis = new NumberAxis();
+            // creating the chart
+            LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+            if (i > 2) {
+                lineChart.setLayoutX(15 + (j * 300));
+                lineChart.setLayoutY(400);
+                j++;
+            } else {
+                lineChart.setLayoutX(15 + (i * 300));
+                lineChart.setLayoutY(100);
+            }
+            lineChart.setTitle(titleList.get(i));
+            lineChart.setPrefSize(286, 220);
+            lineChart.setMaxSize(286, 220);
+            anchorPane.getChildren().addAll(lineChart);
+        }
+
+        Label namePatient = new Label(paciente.getFirstName() + paciente.getLastName());
+        namePatient.setLayoutX(Tab_name1.getLayoutX());
+        namePatient.setLayoutY(Tab_name1.getLayoutY());
+        anchorPane.getChildren().addAll(namePatient);
+        newTab.setContent(anchorPane);
+
+    }
+
+    public void addPatient(Patient paciente) {
+
+        // Pane PatientDialogPane = fxmlLoader.load();
+        // Cria a label do paciente
+        Label namePatient = new Label(newPaciente.getFirstName() + newPaciente.getLastName());
+        namePatient.setLayoutX(label_add.getLayoutX());
+        namePatient.setLayoutY(label_add.getLayoutY());
+        namePatient.setAlignment(Pos.CENTER);
+        namePatient.setPrefWidth(93);
+        namePatient.setPrefHeight(17);
+        Anchor_Pac.getChildren().add(namePatient);
+
+        // cria o novo guia com os graficos
+        Tab newTab = new Tab(namePatient.getText());
+        newTabPaciente(newTab, paciente);
+
+        // cria o botão do novo paciente
+        newButtonPaciente(newTab);
     }
 
 }
