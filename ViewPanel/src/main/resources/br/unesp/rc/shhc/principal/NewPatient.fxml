@@ -53,7 +53,7 @@
                   <TextField fx:id="textWeight" layoutX="155.0" layoutY="169.0" prefHeight="25.0" prefWidth="180.0" />
                   <TextField fx:id="textAge" layoutX="155.0" layoutY="209.0" prefHeight="25.0" prefWidth="180.0" />
                   <Button layoutX="252.0" layoutY="299.0" mnemonicParsing="false" onAction="#btnAddPersonClicked" prefHeight="25.0" prefWidth="60.0" text="OK" />
-                  <Button layoutX="320.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Cancel" />
+                  <Button layoutX="320.0" layoutY="299.0" mnemonicParsing="false" onAction="#btnCloseClicked" prefHeight="25.0" prefWidth="60.0" text="Cancel" />
                </children>
             </AnchorPane>
          </children>

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import br.unesp.rc.shhc.model.Patient;
+import javafx.css.Size;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,6 +32,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -44,16 +46,7 @@ public class ControllerView implements Initializable {
     private AnchorPane MainAnchor_Pac;
 
     @FXML
-    private Label Tab_name1;
-
-    @FXML
     private Button button_Add;
-
-    @FXML
-    private Button button_Pac1;
-
-    @FXML
-    private Label label_Pac1;
 
     @FXML
     private Label label_add;
@@ -67,9 +60,17 @@ public class ControllerView implements Initializable {
     @FXML
     private DialogPane dialogPane;
 
-    Patient newPaciente = new Patient();
+    @FXML
+    private Label labelAge;
 
-    ArrayList<String> titleList = new ArrayList();
+    @FXML
+    private Label labelHeight;
+
+    @FXML
+    private Label labelWeight;
+
+    static Patient newPaciente = new Patient();
+    ArrayList<String> titleList = new ArrayList<>();
 
     public void onOpenDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
@@ -95,28 +96,23 @@ public class ControllerView implements Initializable {
         titleList.add("Glucose");
         titleList.add("BloodPressure");
 
-        Tab_name1.setText(label_Pac1.getText());
-        button_Pac1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                tabPane.getSelectionModel().select(tab_pac1);
-            }
-        });
-
         button_Add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    //Abre painel de novo paciente
                     onOpenDialog();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
+                if(newPaciente != null){
+                    addPatient(newPaciente);
+                }
             }
         });
     }
 
-    public void newButtonPaciente(Tab newTab) {
+    public void newButtonPaciente(Tab newTab, Patient paciente) {
         Button button = new Button("");
 
         Image image = new Image(getClass().getResourceAsStream("icons/profile.png"));
@@ -140,6 +136,10 @@ public class ControllerView implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 tabPane.getSelectionModel().select(newTab);
+                labelHeight.setText(Float.toString(paciente.getHeight()));
+                labelWeight.setText(Float.toString(paciente.getWeight()));
+                labelAge.setText(Integer.toString(paciente.getAge()));
+                
             }
         });
 
@@ -154,16 +154,19 @@ public class ControllerView implements Initializable {
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefWidth(Anchor_Pac.getPrefWidth());
         for (int i = 0; i < 6; i++) {
-            // defining the axes
+            // Define os Eixos
             CategoryAxis xAxis = new CategoryAxis();
             NumberAxis yAxis = new NumberAxis();
-            // creating the chart
+            // Cria os graficos
             LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+
             if (i > 2) {
+                //cria os graficos inferiores
                 lineChart.setLayoutX(15 + (j * 300));
                 lineChart.setLayoutY(400);
                 j++;
             } else {
+                //cria os graficos superiores
                 lineChart.setLayoutX(15 + (i * 300));
                 lineChart.setLayoutY(100);
             }
@@ -173,19 +176,19 @@ public class ControllerView implements Initializable {
             anchorPane.getChildren().addAll(lineChart);
         }
 
-        Label namePatient = new Label(paciente.getFirstName() + paciente.getLastName());
-        namePatient.setLayoutX(Tab_name1.getLayoutX());
-        namePatient.setLayoutY(Tab_name1.getLayoutY());
+        Label namePatient = new Label(paciente.getFirstName() + " " + paciente.getLastName());
+        namePatient.setFont(new Font("System", 15));
+        namePatient.setLayoutX(436);
+        namePatient.setLayoutY(27);
         anchorPane.getChildren().addAll(namePatient);
         newTab.setContent(anchorPane);
 
     }
 
-    public void addPatient(Patient paciente) {
+    public void addPatient(Patient newPaciente) {
 
-        // Pane PatientDialogPane = fxmlLoader.load();
         // Cria a label do paciente
-        Label namePatient = new Label(newPaciente.getFirstName() + newPaciente.getLastName());
+        Label namePatient = new Label(newPaciente.getFirstName() + " " + newPaciente.getLastName());
         namePatient.setLayoutX(label_add.getLayoutX());
         namePatient.setLayoutY(label_add.getLayoutY());
         namePatient.setAlignment(Pos.CENTER);
@@ -195,10 +198,15 @@ public class ControllerView implements Initializable {
 
         // cria o novo guia com os graficos
         Tab newTab = new Tab(namePatient.getText());
-        newTabPaciente(newTab, paciente);
+        newTabPaciente(newTab, newPaciente);
 
         // cria o botão do novo paciente
-        newButtonPaciente(newTab);
+        newButtonPaciente(newTab, newPaciente);
+    }
+
+    //metodo para receber as informações do paciente do ControllerDailog
+    public static void paciente(Patient newPatient) {
+        newPaciente = newPatient;
     }
 
 }

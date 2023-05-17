@@ -36,11 +36,17 @@ public class ControllerDialog {
         float height = Float.valueOf(textHeight.getText());
         float weight = Float.valueOf(textWeight.getText());
         int age = Integer.valueOf(textAge.getText());
-
         Patient paciente = new Patient(firstName, lastName, height, weight, age);
-       
+        ControllerView.paciente(paciente);
         closeStage(event);
     }
+
+    @FXML
+    void btnCloseClicked(ActionEvent event) {
+        ControllerView.paciente(null);
+        closeStage(event);
+    }
+    
 
     private void closeStage(ActionEvent event) {
         Node source = (Node) event.getSource();
