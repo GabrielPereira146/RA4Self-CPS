@@ -34,9 +34,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>br.unesp.rc.shhc.model</groupId>
-            <artifactId>SHHCMavenModel</artifactId>
-            <version>1.0.0</version>
+           <groupId>br.unesp.rc.shhc.model</groupId>
+           <artifactId>SHHCMavenModel</artifactId>
+           <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

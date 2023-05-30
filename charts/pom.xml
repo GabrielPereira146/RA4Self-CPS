@@ -30,10 +30,10 @@
             <artifactId>GsonUtilsMaven</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-         <dependency>
+         <dependency>     
             <groupId>br.unesp.rc.shhc.model</groupId>
             <artifactId>SHHCMavenModel</artifactId>
-            <version>1.0.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>

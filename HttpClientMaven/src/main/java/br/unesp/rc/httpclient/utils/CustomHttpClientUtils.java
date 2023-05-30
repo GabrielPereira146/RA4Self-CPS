@@ -49,10 +49,11 @@ public class CustomHttpClientUtils {
 
                 InputStream inputStream = entity.getContent();
 
-                Scanner s = new Scanner(inputStream).useDelimiter("\\A");
-                String result = s.hasNext() ? s.next() : "";
-                client.close();
-                return result;
+                try (Scanner s = new Scanner(inputStream).useDelimiter("\\A")) {
+                    String result = s.hasNext() ? s.next() : "";
+                    client.close();
+                    return result;
+                }
             } catch (IOException ex) {
                 System.out.println("Message: " + ex.getMessage());
                 return null;

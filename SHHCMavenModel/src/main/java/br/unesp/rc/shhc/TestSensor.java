@@ -1,27 +1,27 @@
-package br.unesp.rc.shhc.model;
+package br.unesp.rc.shhc;
 
-public class AirFlow {
+public class TestSensor {
 
     private int value;
     private String status;
     private String ID;
 
-    public AirFlow(int airflow, String status, String ID) {
-        this.value = airflow;
+    public TestSensor(int value, String status, String ID) {
+        this.value = value;
         this.status = status;
         this.ID = ID;
     }
 
-    public AirFlow(int value, String status) {
+    public TestSensor(int value, String status) {
         this.value = value;
         this.status = status;
     }
 
-    public AirFlow(int value) {
+    public TestSensor(int value) {
         this.value = value;
     }
 
-    public AirFlow() {
+    public TestSensor() {
 
     }
 
@@ -51,6 +51,6 @@ public class AirFlow {
 
     @Override
     public String toString() {
-        return "value = " + value + ", status = " + status + ", ID = " + ID;
+        return "TestSensor{" + "value = " + value + ", status = " + status + ", ID = " + ID + '}';
     }
 }

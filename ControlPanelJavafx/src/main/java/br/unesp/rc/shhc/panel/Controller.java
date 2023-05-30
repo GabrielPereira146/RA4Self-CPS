@@ -6,12 +6,12 @@ import java.util.ResourceBundle;
 
 import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
 import br.unesp.rc.gson.utils.GsonUtils;
-import br.unesp.rc.shhc.model.Temperature;
-import br.unesp.rc.shhc.model.Glucose;
-import br.unesp.rc.shhc.model.AirFlow;
-import br.unesp.rc.shhc.model.PulseOxygen;
-import br.unesp.rc.shhc.model.BloodPressure;
-import br.unesp.rc.shhc.model.HeartRate;
+import br.unesp.rc.shhc.Temperature;
+import br.unesp.rc.shhc.Glucose;
+import br.unesp.rc.shhc.AirFlow;
+import br.unesp.rc.shhc.PulseOxygen;
+import br.unesp.rc.shhc.BloodPressure;
+import br.unesp.rc.shhc.HeartRate;
 
 
 import javafx.beans.value.ChangeListener;

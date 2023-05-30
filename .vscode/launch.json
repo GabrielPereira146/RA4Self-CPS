@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ShhcApplication",
+            "request": "launch",
+            "mainClass": "br.unesp.rc.shhc.ShhcApplication",
+            "projectName": "ShhcSensorAPI"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "br.unesp.rc.shhc.principal.App",

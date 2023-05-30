@@ -1,27 +1,27 @@
-package br.unesp.rc.shhc.model;
+package br.unesp.rc.shhc;
 
-public class PulseOxygen {
+public class HeartRate {
 
     private int value;
     private String status;
     private String ID;
 
-    public PulseOxygen(int value, String status, String ID) {
+    public HeartRate(int value, String status, String ID) {
         this.value = value;
         this.status = status;
         this.ID = ID;
     }
 
-    public PulseOxygen(int value, String status) {
+    public HeartRate(int value, String status) {
         this.value = value;
         this.status = status;
     }
 
-    public PulseOxygen(int value) {
+    public HeartRate(int value) {
         this.value = value;
     }
 
-    public PulseOxygen() {
+    public HeartRate() {
 
     }
 

@@ -1,4 +1,4 @@
-package br.unesp.rc.shhc.model;
+package br.unesp.rc.shhc;
 
 public class BloodPressure {
 

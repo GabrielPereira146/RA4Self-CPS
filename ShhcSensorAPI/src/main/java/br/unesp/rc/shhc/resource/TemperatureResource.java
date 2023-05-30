@@ -1,6 +1,6 @@
-package br.unesp.rc.sshc.resource;
+package br.unesp.rc.shhc.resource;
 
-import br.unesp.rc.shhc.model.AirFlow;
+import br.unesp.rc.shhc.Temperature;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -9,38 +9,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/shhc/AirFlow")
-public class AirFlowResource {
+@RequestMapping("/shhc/Temperature")
+public class TemperatureResource {
 
-    private static AirFlow air;
+    private static Temperature temp;
 
     static {
-        air = new AirFlow(38, "Online", "1");
+        temp = new Temperature(36, "Offline", "1");
     }
 
     @GetMapping("/")
-    public AirFlow getAirFlow() {
+    public Temperature getTemperature() {
         this.print();
-        return air;
+        return temp;
     }
 
     @PutMapping("/update")
-    public void updateTemperature(@RequestBody AirFlow airFlow) {
-        System.out.println("Value to update: " + airFlow);
-        air = airFlow;        
+    public void updateTemperature(@RequestBody Temperature temperature) {
+        System.out.println("Value to update: " + temperature);
+        temp = temperature;        
         this.print();
     }
 
     @PostMapping("/save")
-    public void save(@RequestBody AirFlow airFlow) {
-        System.out.println("Value to save: " + airFlow);                   
-        air = airFlow;        
+    public void save(@RequestBody Temperature temperature) {
+        System.out.println("Value to save: " + temperature);                   
+        temp = temperature;        
         this.print();
     }
 
     private void print(){
         System.out.println("------------------------------------------");
-        System.out.println(air);
+        System.out.println(temp);
         System.out.println("------------------------------------------");
     }
 }
