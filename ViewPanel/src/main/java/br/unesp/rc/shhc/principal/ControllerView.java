@@ -151,6 +151,7 @@ public class ControllerView implements Initializable {
         int j = 0;
         tabPane.getTabs().add(newTab);
         AnchorPane anchorPane = new AnchorPane();
+        //CRIAÇÃO DOS GRAFICOS
         anchorPane.setPrefWidth(Anchor_Pac.getPrefWidth());
         for (int i = 0; i < 6; i++) {
             // Define os Eixos
@@ -169,6 +170,7 @@ public class ControllerView implements Initializable {
                 lineChart.setLayoutX(15 + (i * 300));
                 lineChart.setLayoutY(100);
             }
+            lineChart.setId(titleList.get(i) + "Chart");
             lineChart.setTitle(titleList.get(i));
             lineChart.setPrefSize(286, 220);
             lineChart.setMaxSize(286, 220);

@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import br.unesp.rc.shhc.model.Patient;
+import br.unesp.rc.shhc.Patient;
 
 public class ControllerDialog {
 
