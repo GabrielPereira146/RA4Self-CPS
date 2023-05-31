@@ -14,6 +14,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableColumn.SortType;
 
 public class ControllerChart {
 
@@ -34,9 +35,11 @@ public class ControllerChart {
         // Cria o loop de atualização do gráfico
         AnimationTimer loop = new AnimationTimer() {
             private long lastUpdate = 0;
-
+            
+            
             @Override
             public void handle(long now) {
+                System.out.println("BATATA");
                 // o loop executa uma vez a cada 2 segundos
                 if (now - lastUpdate >= 2_000_000_000L) {
 

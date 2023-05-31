@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import br.unesp.rc.shhc.principal.ControllerChart;
 
 import br.unesp.rc.shhc.model.Patient;
 import javafx.event.ActionEvent;
@@ -71,8 +72,11 @@ public class ControllerView implements Initializable {
     static Patient newPaciente = new Patient();
     ArrayList<String> titleList = new ArrayList<>();
     static List<LineChart> listaCharts = new ArrayList<>(); 
+<<<<<<< HEAD:Dashboard/src/main/java/br/unesp/rc/shhc/dashboard/ControllerView.java
     //static List<Pacient> listaPer
     int idPaciente = 0;
+=======
+>>>>>>> 4cc1a00ef416da765f2d1e94b47e2416c0fade3b:ViewPanel/src/main/java/br/unesp/rc/shhc/principal/ControllerView.java
 
     public void onOpenDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
@@ -112,7 +116,11 @@ public class ControllerView implements Initializable {
                     addPatient(newPaciente);
                 }
                 ControllerChart controllerChart = new ControllerChart();
+<<<<<<< HEAD:Dashboard/src/main/java/br/unesp/rc/shhc/dashboard/ControllerView.java
                 controllerChart.initialize(idPaciente);
+=======
+                controllerChart.initialize();
+>>>>>>> 4cc1a00ef416da765f2d1e94b47e2416c0fade3b:ViewPanel/src/main/java/br/unesp/rc/shhc/principal/ControllerView.java
 
             }
         });
