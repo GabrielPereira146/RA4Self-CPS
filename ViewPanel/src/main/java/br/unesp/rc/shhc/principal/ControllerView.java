@@ -4,7 +4,9 @@ package br.unesp.rc.shhc.principal;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import br.unesp.rc.shhc.principal.ControllerChart;
 
 import br.unesp.rc.shhc.Patient;
 import javafx.event.ActionEvent;
@@ -70,6 +72,7 @@ public class ControllerView implements Initializable {
 
     static Patient newPaciente = new Patient();
     ArrayList<String> titleList = new ArrayList<>();
+    static List<LineChart> listaCharts = new ArrayList<>(); 
 
     public void onOpenDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
@@ -107,8 +110,12 @@ public class ControllerView implements Initializable {
                 if(newPaciente != null){
                     addPatient(newPaciente);
                 }
+                ControllerChart controllerChart = new ControllerChart();
+                controllerChart.initialize();
+
             }
         });
+        
     }
 
     public void newButtonPaciente(Tab newTab, Patient paciente) {
@@ -148,6 +155,7 @@ public class ControllerView implements Initializable {
     }
 
     public void newTabPaciente(Tab newTab, Patient paciente) {
+        
         int j = 0;
         tabPane.getTabs().add(newTab);
         AnchorPane anchorPane = new AnchorPane();
@@ -175,8 +183,10 @@ public class ControllerView implements Initializable {
             lineChart.setPrefSize(286, 220);
             lineChart.setMaxSize(286, 220);
             anchorPane.getChildren().addAll(lineChart);
+            listaCharts.add(lineChart);
         }
-
+        
+        
         Label namePatient = new Label(paciente.getFirstName() + " " + paciente.getLastName());
         namePatient.setFont(new Font("System", 15));
         namePatient.setLayoutX(436);
@@ -203,6 +213,7 @@ public class ControllerView implements Initializable {
 
         // cria o botão do novo paciente
         newButtonPaciente(newTab, newPaciente);
+        
     }
 
     //metodo para receber as informações do paciente do ControllerDailog

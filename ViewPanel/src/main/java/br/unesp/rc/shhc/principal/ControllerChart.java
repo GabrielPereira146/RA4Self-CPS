@@ -12,16 +12,23 @@ import br.unesp.rc.shhc.Temperature;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.sound.sampled.SourceDataLine;
+
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableColumn.SortType;
 
-public class ControllerChart implements Initializable {
+import br.unesp.rc.shhc.principal.ControllerView;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+public class ControllerChart{
+
+ 
+    public void initialize() {
 
 
         XYChart.Series<String, Number> TempSeries = new XYChart.Series<String, Number>();
@@ -34,15 +41,15 @@ public class ControllerChart implements Initializable {
         XYChart.Series<String, Number> PulseOSeries = new XYChart.Series<String, Number>();
 
         
-       // chartTemperature.getData().add(TempSeries);
-       // chartTemperature.setLegendVisible(false);
 
         // Cria o loop de atualização do gráfico
         AnimationTimer loop = new AnimationTimer() {
             private long lastUpdate = 0;
-
+            
+            
             @Override
             public void handle(long now) {
+                System.out.println("BATATA");
                 // o loop executa uma vez a cada 2 segundos
                 if (now - lastUpdate >= 2_000_000_000L) {
 
@@ -52,7 +59,8 @@ public class ControllerChart implements Initializable {
                     String json = CustomHttpClientUtils.getValueByHttp(url);
                     temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
                     //Atuliza o grafico
-                    updateChart(temperature.getValue(), TempSeries);
+                    updateChartTemperature(temperature.getValue(), TempSeries);
+                    System.out.println("DENTRO DO CHART:" + temperature.getValue());
 
                     // Insere um novo ponto de dados na série de AirFlow
                     url = "http://localhost:8084/shhc/AirFlow/";
@@ -97,6 +105,26 @@ public class ControllerChart implements Initializable {
         };
         loop.start();
 
+    }
+
+    public void updateChartTemperature(int value, XYChart.Series<String, Number> series) {
+
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        // Cria os graficos
+        LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+        lineChart = ControllerView.listaCharts.get(2);
+        int y = 0;
+        if(series.getData().size()>0){
+            y = Integer.parseInt(series.getData().get(series.getData().size() - 1).getXValue());
+        }
+
+        series.getData().add(new XYChart.Data<String, Number>(String.valueOf(y+1), value));
+        if (series.getData().size() > 10) {
+            series.getData().remove(0);
+        }
+       lineChart.getData().add(series);
+       ControllerView.listaCharts.set(2, lineChart);
     }
 
     public void updateChart(int value, XYChart.Series<String, Number> series) {
