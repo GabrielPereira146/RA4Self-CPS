@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ControlPanel",
+            "request": "launch",
+            "mainClass": "br.unesp.rc.shhc.panel.ControlPanel",
+            "projectName": "ControlPanelJavafx",
+            "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
             "name": "ShhcApplication",
             "request": "launch",
             "mainClass": "br.unesp.rc.shhc.ShhcApplication",
@@ -15,24 +23,9 @@
             "type": "java",
             "name": "App",
             "request": "launch",
-            "mainClass": "br.unesp.rc.shhc.principal.App",
-            "projectName": "ViewPanel",
+            "mainClass": "br.unesp.rc.shhc.dashboard.App",
+            "projectName": "Dashboard",
             "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
-            "name": "TemperatureChart",
-            "request": "launch",
-            "mainClass": "br.unesp.rc.shhc.graphics.TemperatureChart",
-            "projectName": "charts",
-            "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
-            "name": "ControlPanel",
-            "request": "launch",
-            "mainClass": "br.unesp.rc.shhc.view.ControlPanel",
-            "projectName": "ControlPanelMaven"
         },
         {
             "type": "java",
@@ -44,7 +37,7 @@
             "type": "java",
             "name": "App",
             "request": "launch",
-            "mainClass": "br.unesp.rc.shhc.panel.App",
+            "mainClass": "br.unesp.rc.shhc.view.ControlPanel",
             "projectName": "ControlPanelJavafx",
             "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
         },
