@@ -1,14 +1,23 @@
 package br.unesp.rc.shhc.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.scene.chart.LineChart;
+
+
 public class Patient {
     
+    private int idPaciente;
     private String firstName;
     private String lastName;
     private float height;
     private float weight;
     private int age;
+    private List<LineChart> listCharts = new ArrayList<>();
 
     public Patient() {
+        
     }
 
     public Patient(String firstName, String lastName, float height, float weight, int age) {
@@ -17,6 +26,13 @@ public class Patient {
         this.height = height;
         this.weight = weight;
         this.age = age;
+    }
+     public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     public String getFirstName() {
@@ -58,6 +74,8 @@ public class Patient {
     public void setAge(int age) {
         this.age = age;
     }
+
+    
 
     @Override
     public String toString() {
@@ -103,6 +121,14 @@ public class Patient {
         if (age != other.age)
             return false;
         return true;
+    }
+
+    public List<LineChart> getListCharts() {
+        return listCharts;
+    }
+
+    public void setListCharts(List<LineChart> listCharts) {
+        this.listCharts = listCharts;
     }
     
 

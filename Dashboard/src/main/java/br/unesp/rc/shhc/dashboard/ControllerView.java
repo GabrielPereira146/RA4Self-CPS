@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import br.unesp.rc.shhc.model.Patient;
+import br.unesp.rc.shhc.repository.PatientRepository;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -70,9 +71,7 @@ public class ControllerView implements Initializable {
 
     static Patient newPaciente = new Patient();
     ArrayList<String> titleList = new ArrayList<>();
-    static List<LineChart> listaCharts = new ArrayList<>(); 
-    //static List<Pacient> listaPer
-    int idPaciente = 0;
+ 
 
     public void onOpenDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
@@ -102,20 +101,20 @@ public class ControllerView implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    //Abre painel de novo paciente
+                    // Abre painel de novo paciente
                     onOpenDialog();
-                    idPaciente++;
+                    newPaciente.setIdPaciente(PatientRepository.patients.size());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if(newPaciente != null){
+                if (newPaciente != null) {
                     addPatient(newPaciente);
+                    ControllerChart controllerChart = new ControllerChart();
+                    controllerChart.initialize(newPaciente);
                 }
-                ControllerChart controllerChart = new ControllerChart();
-                controllerChart.initialize(idPaciente);
+
             }
         });
-        
     }
 
     public void newButtonPaciente(Tab newTab, Patient paciente) {
@@ -145,7 +144,7 @@ public class ControllerView implements Initializable {
                 labelHeight.setText(Float.toString(paciente.getHeight()));
                 labelWeight.setText(Float.toString(paciente.getWeight()));
                 labelAge.setText(Integer.toString(paciente.getAge()));
-                
+
             }
         });
 
@@ -155,26 +154,26 @@ public class ControllerView implements Initializable {
     }
 
     public void newTabPaciente(Tab newTab, Patient paciente) {
-        
+
         int j = 0;
         tabPane.getTabs().add(newTab);
         AnchorPane anchorPane = new AnchorPane();
-        //CRIAÇÃO DOS GRAFICOS
+        // CRIAÇÃO DOS GRAFICOS
         anchorPane.setPrefWidth(Anchor_Pac.getPrefWidth());
         for (int i = 0; i < 6; i++) {
             // Define os Eixos
             CategoryAxis xAxis = new CategoryAxis();
             NumberAxis yAxis = new NumberAxis();
-            
+
             // Cria os graficos
             LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
             if (i > 2) {
-                //cria os graficos inferiores
+                // cria os graficos inferiores
                 lineChart.setLayoutX(15 + (j * 300));
                 lineChart.setLayoutY(400);
                 j++;
             } else {
-                //cria os graficos superiores
+                // cria os graficos superiores
                 lineChart.setLayoutX(15 + (i * 300));
                 lineChart.setLayoutY(100);
             }
@@ -182,15 +181,14 @@ public class ControllerView implements Initializable {
             lineChart.setTitle(titleList.get(i));
             lineChart.setPrefSize(286, 220);
             lineChart.setMaxSize(286, 220);
-            
-            if(i != 5){
+
+            if (i != 5) {
                 lineChart.setLegendVisible(false);
             }
             anchorPane.getChildren().addAll(lineChart);
-            listaCharts.add(lineChart);
+            paciente.getListCharts().add(lineChart);
         }
-        
-        
+
         Label namePatient = new Label(paciente.getFirstName() + " " + paciente.getLastName());
         namePatient.setFont(new Font("System", 15));
         namePatient.setLayoutX(436);
@@ -217,10 +215,10 @@ public class ControllerView implements Initializable {
 
         // cria o botão do novo paciente
         newButtonPaciente(newTab, newPaciente);
-        
+
     }
 
-    //metodo para receber as informações do paciente do ControllerDailog
+    // metodo para receber as informações do paciente do ControllerDailog
     public static void paciente(Patient newPatient) {
         newPaciente = newPatient;
     }

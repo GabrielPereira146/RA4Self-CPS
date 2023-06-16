@@ -8,16 +8,13 @@ import br.unesp.rc.shhc.Glucose;
 import br.unesp.rc.shhc.HeartRate;
 import br.unesp.rc.shhc.PulseOxygen;
 import br.unesp.rc.shhc.Temperature;
-
+import br.unesp.rc.shhc.model.Patient;
 import javafx.animation.AnimationTimer;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 public class ControllerChart {
 
-    public void initialize(int idPaciente) {
+    public void initialize(Patient paciente) {
 
         XYChart.Series<String, Number> TempSeries = new XYChart.Series<String, Number>();
         XYChart.Series<String, Number> AirSeries = new XYChart.Series<String, Number>();
@@ -48,23 +45,23 @@ public class ControllerChart {
                     String json = CustomHttpClientUtils.getValueByHttp(url);
                     temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
                     // Atuliza o grafico
-                    updateChart(temperature.getValue(), TempSeries, 2, idPaciente);
-                    System.out.println("DENTRO DO CHART:" + temperature.getValue());
+                    updateChart(temperature.getValue(), TempSeries, 2, paciente);
+                    //System.out.println("DENTRO DO CHART:" + temperature.getValue());
 
                     // Insere um novo ponto de dados na série de AirFlow
                     url = "http://localhost:8084/shhc/AirFlow/";
                     AirFlow airFlow;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     airFlow = (AirFlow) GsonUtils.jsonToObject(json, AirFlow.class);
-                    updateChart(airFlow.getValue(), AirSeries, 3, idPaciente);
+                    updateChart(airFlow.getValue(), AirSeries, 3, paciente);
 
                     // Insere um novo ponto de dados na série de BloodPressure
                     url = "http://localhost:8084/shhc/BloodPressure/";
                     BloodPressure bloodPressure;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     bloodPressure = (BloodPressure) GsonUtils.jsonToObject(json, BloodPressure.class);
-                    updateChart(bloodPressure.getDiastolicValue(), BloodPDSeries, 5, idPaciente);
-                    updateChart(bloodPressure.getSystolicValue(), BloodPSSeries, 5, idPaciente);
+                    updateChart(bloodPressure.getDiastolicValue(), BloodPDSeries, 5, paciente);
+                    updateChart(bloodPressure.getSystolicValue(), BloodPSSeries, 5, paciente);
                     // COLOCAR A SEGUNDA PARTE DO BLOOD PRESSURE
 
                     // Insere um novo ponto de dados na série de Glucose
@@ -72,21 +69,21 @@ public class ControllerChart {
                     Glucose glucose;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     glucose = (Glucose) GsonUtils.jsonToObject(json, Glucose.class);
-                    updateChart(glucose.getValue(), GlucoseSeries, 4, idPaciente);
+                    updateChart(glucose.getValue(), GlucoseSeries, 4, paciente);
 
                     // Insere um novo ponto de dados na série de HeartRate
                     url = "http://localhost:8084/shhc/HeartRate/";
                     HeartRate heartRate;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     heartRate = (HeartRate) GsonUtils.jsonToObject(json, HeartRate.class);
-                    updateChart(heartRate.getValue(), HeartRSeries, 1, idPaciente);
+                    updateChart(heartRate.getValue(), HeartRSeries, 1, paciente);
 
                     // Insere um novo ponto de dados na série de PulseOxygen
                     url = "http://localhost:8084/shhc/PulseOxygen/";
                     PulseOxygen pulseOxygen;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     pulseOxygen = (PulseOxygen) GsonUtils.jsonToObject(json, PulseOxygen.class);
-                    updateChart(pulseOxygen.getValue(), PulseOSeries, 0, idPaciente);
+                    updateChart(pulseOxygen.getValue(), PulseOSeries, 0, paciente);
 
                     // Atualiza o lastUpdate para o tempo atual
                     lastUpdate = now;
@@ -97,15 +94,7 @@ public class ControllerChart {
 
     }
 
-    public void updateChart(int value, XYChart.Series<String, Number> series, int idChart, int idPaciente) {
-        // Cria um grafico auxiliar
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
-
-        int chart = idChart % 6 + ((idPaciente * 6) - 6);
-        lineChart = ControllerView.listaCharts.get(chart);
-
+    public void updateChart(int value, XYChart.Series<String, Number> series, int idChart, Patient p) {
         int y = 0;
         if (series.getData().size() > 0) {
             y = Integer.parseInt(series.getData().get(series.getData().size() - 1).getXValue());
@@ -115,9 +104,6 @@ public class ControllerChart {
         if (series.getData().size() > 10) {
             series.getData().remove(0);
         }
-  
-        lineChart.getData().add(series);
-        ControllerView.listaCharts.set(idChart, lineChart);
-
+        p.getListCharts().get(idChart).getData().add(series);
     }
 }

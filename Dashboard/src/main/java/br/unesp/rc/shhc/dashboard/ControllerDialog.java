@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import br.unesp.rc.shhc.model.*;
+import br.unesp.rc.shhc.repository.PatientRepository;
 
 public class ControllerDialog {
 
@@ -32,7 +33,8 @@ public class ControllerDialog {
         float weight = Float.valueOf(textWeight.getText());
         int age = Integer.valueOf(textAge.getText());
         Patient paciente = new Patient(firstName, lastName, height, weight, age);
-        ControllerView.paciente(paciente);
+        if (PatientRepository.cadastrarPaciente(paciente))
+            ControllerView.paciente(paciente);
         closeStage(event);
     }
 
@@ -41,7 +43,6 @@ public class ControllerDialog {
         ControllerView.paciente(null);
         closeStage(event);
     }
-    
 
     private void closeStage(ActionEvent event) {
         Node source = (Node) event.getSource();
