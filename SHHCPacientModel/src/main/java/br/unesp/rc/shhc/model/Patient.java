@@ -14,7 +14,7 @@ public class Patient {
     private float height;
     private float weight;
     private int age;
-    private List<LineChart> listCharts = new ArrayList<>();
+    private List<LineChart<String, Number>> listCharts = new ArrayList<>();
 
     public Patient() {
         
@@ -123,11 +123,11 @@ public class Patient {
         return true;
     }
 
-    public List<LineChart> getListCharts() {
+    public List<LineChart<String, Number>> getListCharts() {
         return listCharts;
     }
 
-    public void setListCharts(List<LineChart> listCharts) {
+    public void setListCharts(List<LineChart<String, Number>> listCharts) {
         this.listCharts = listCharts;
     }
     
