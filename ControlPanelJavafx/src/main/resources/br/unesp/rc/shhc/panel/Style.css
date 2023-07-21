@@ -38,3 +38,21 @@
 	-fx-padding: 1px;
 
 }
+
+.text-field {
+    -fx-background-color: #b9b9b9, white;
+	-fx-font-family: "Franklin Gothic Medium";
+	-fx-font-size: 13;
+	-fx-alignment: center-Left; 
+    -fx-accent: #007acc;
+	-fx-background-insets: 0, 0 0 0 0;
+	-fx-background-radius: 0;
+	-fx-padding: 1px;
+
+}
+
+.button {
+	-fx-background-color: -fx-primary-color;
+	-fx-background-radius: 0;
+
+}

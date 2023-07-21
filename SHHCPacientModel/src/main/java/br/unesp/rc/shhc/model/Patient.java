@@ -123,7 +123,7 @@ public class Patient {
         return true;
     }
 
-    public List<LineChart<String, Number>> getListCharts() {
+    public List<LineChart<String,Number>> getListCharts() {
         return listCharts;
     }
 
