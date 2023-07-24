@@ -122,7 +122,7 @@ public class ControllerView implements Initializable {
     private void createContainer(Patient newPaciente) {
         String port = newPaciente.getPort() + ":8080";
         String containerName =  Integer.toString(newPaciente.getIdPaciente())  + newPaciente.getFirstName();
-        
+        System.out.println(port);
         try {
             String dockerCommand = "docker";
             String[] dockerArgs = { "run", "-p", port, "--name", containerName,"shhcapi" };
@@ -140,23 +140,6 @@ public class ControllerView implements Initializable {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-
-        try {
-            // Comando Docker para iniciar o contêiner
-            String dockerCommand = "docker start " + containerName;
-
-            // Criação do processo para executar o comando Docker
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", dockerCommand);
-            processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
-
-            // Inicia o processo e aguarda a conclusão
-            Process process = processBuilder.start();
-            process.waitFor();
-
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
    
     }
     
