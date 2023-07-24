@@ -131,13 +131,10 @@ public class ControllerView implements Initializable {
             ProcessBuilder processBuilder = new ProcessBuilder(dockerArgs);
             processBuilder.command().add(0, dockerCommand);
             processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
-
-            // Inicia o processo e aguarda a conclusão
-            Process process = processBuilder.start();
-            process.waitFor();
+            processBuilder.start();
             
 
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
    
