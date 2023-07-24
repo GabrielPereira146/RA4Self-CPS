@@ -15,6 +15,7 @@ import javafx.scene.chart.XYChart;
 public class ControllerChart {
 
     public void initialize(Patient paciente) {
+        String URL = "http://localhost:" + paciente.getPort();
         //Criação das sereis para os graficos
         XYChart.Series<String, Number> TempSeries = new XYChart.Series<String, Number>();
         XYChart.Series<String, Number> AirSeries = new XYChart.Series<String, Number>();
@@ -46,21 +47,21 @@ public class ControllerChart {
                 if (now - lastUpdate >= 2_000_000_000L) {
 
                     // Insere um novo ponto de dados na série de PulseOxygen
-                    String url = "http://localhost:8084/shhc/PulseOxygen/";
+                    String url = URL + "/shhc/PulseOxygen/";
                     PulseOxygen pulseOxygen;
                     String json = CustomHttpClientUtils.getValueByHttp(url);
                     pulseOxygen = (PulseOxygen) GsonUtils.jsonToObject(json, PulseOxygen.class);
                     updateChart(pulseOxygen.getValue(), PulseOSeries);
 
                     // Insere um novo ponto de dados na série de HeartRate
-                    url = "http://localhost:8084/shhc/HeartRate/";
+                    url =  URL + "/shhc/HeartRate/";
                     HeartRate heartRate;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     heartRate = (HeartRate) GsonUtils.jsonToObject(json, HeartRate.class);
                     updateChart(heartRate.getValue(), HeartRSeries);
 
                     // Insere um novo ponto de dados na série de Temperatura
-                    url = "http://localhost:8084/shhc/Temperature/";
+                    url =  URL + "/shhc/Temperature/";
                     Temperature temperature;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
@@ -68,21 +69,21 @@ public class ControllerChart {
                     updateChart(temperature.getValue(), TempSeries);
 
                     // Insere um novo ponto de dados na série de AirFlow
-                    url = "http://localhost:8084/shhc/AirFlow/";
+                    url =  URL + "/shhc/AirFlow/";
                     AirFlow airFlow;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     airFlow = (AirFlow) GsonUtils.jsonToObject(json, AirFlow.class);
                     updateChart(airFlow.getValue(), AirSeries);
 
                     // Insere um novo ponto de dados na série de Glucose
-                    url = "http://localhost:8084/shhc/Glucose/";
+                    url =  URL + "/shhc/Glucose/";
                     Glucose glucose;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     glucose = (Glucose) GsonUtils.jsonToObject(json, Glucose.class);
                     updateChart(glucose.getValue(), GlucoseSeries);
 
                     // Insere um novo ponto de dados na série de BloodPressure
-                    url = "http://localhost:8084/shhc/BloodPressure/";
+                    url = URL + "/shhc/BloodPressure/";
                     BloodPressure bloodPressure;
                     json = CustomHttpClientUtils.getValueByHttp(url);
                     bloodPressure = (BloodPressure) GsonUtils.jsonToObject(json, BloodPressure.class);

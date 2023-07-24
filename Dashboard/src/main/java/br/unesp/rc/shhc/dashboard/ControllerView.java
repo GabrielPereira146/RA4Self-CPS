@@ -108,14 +108,39 @@ public class ControllerView implements Initializable {
                 }
                 if (newPaciente != null) {
                     addPatient(newPaciente);
+                    createContainer(newPaciente);
                     ControllerChart controllerChart = new ControllerChart();
                     controllerChart.initialize(newPaciente);
                 }
 
             }
+
+            
         });
     }
 
+    private void createContainer(Patient newPaciente) {
+        String port = newPaciente.getPort() + ":8080";
+        
+        try {
+            String dockerCommand = "docker";
+            String[] dockerArgs = { "run", "-p", port, "SHHCapi" };
+            // Substitua "porta_interna" e "nome_da_sua_imagem" pelos valores desejados
+
+            // Criação do processo para executar o comando Docker
+            ProcessBuilder processBuilder = new ProcessBuilder(dockerArgs);
+            processBuilder.command().add(0, dockerCommand);
+            processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
+
+            // Inicia o processo e aguarda a conclusão
+            Process process = processBuilder.start();
+            process.waitFor();
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void newButtonPaciente(Tab newTab, Patient paciente) {
         Button button = new Button("");
 

@@ -14,11 +14,13 @@ public class Patient {
     private float height;
     private float weight;
     private int age;
+    private String port;
     private List<LineChart<String, Number>> listCharts = new ArrayList<>();
 
     public Patient() {
         
     }
+
 
     public Patient(String firstName, String lastName, float height, float weight, int age) {
         this.firstName = firstName;
@@ -26,6 +28,15 @@ public class Patient {
         this.height = height;
         this.weight = weight;
         this.age = age;
+    }
+
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
     }
      public int getIdPaciente() {
         return idPaciente;
@@ -75,13 +86,13 @@ public class Patient {
         this.age = age;
     }
 
-    
 
     @Override
     public String toString() {
-        return "Patient: firstName=" + firstName + ", lastName=" + lastName + ", height=" + height + ", weight="
-                + weight + ", age=" + age;
+        return "Patient [idPaciente=" + idPaciente + ", firstName=" + firstName + ", lastName=" + lastName + ", height="
+                + height + ", weight=" + weight + ", age=" + age + ", port=" + port + "]";
     }
+
 
     @Override
     public int hashCode() {

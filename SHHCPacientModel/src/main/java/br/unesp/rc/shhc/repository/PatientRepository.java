@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import br.unesp.rc.shhc.model.Patient;
 
 public class PatientRepository {
+    
+    
     public static List<Patient> patients = new ArrayList<>();
 
     private PatientRepository() {
@@ -27,6 +29,7 @@ public class PatientRepository {
     }
 
     public static boolean cadastrarPaciente(Patient patient) {
+        int porta = 8080;
         // -------------------------------------------
         // Consultado se o paciente existe
         // -------------------------------------------
@@ -36,6 +39,10 @@ public class PatientRepository {
                 return false;
             }
         }
+
+        porta += patients.size();
+        patient.setPort(Integer.toString(porta));
+
         patients.add(patient);
         return true;
     }
