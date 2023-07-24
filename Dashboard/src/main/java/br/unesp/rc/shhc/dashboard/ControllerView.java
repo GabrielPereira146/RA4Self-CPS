@@ -124,7 +124,7 @@ public class ControllerView implements Initializable {
         
         try {
             String dockerCommand = "docker";
-            String[] dockerArgs = { "run", "-p", port, "SHHCapi" };
+            String[] dockerArgs = { "run", "-p", port, "shhcapi" };
             // Substitua "porta_interna" e "nome_da_sua_imagem" pelos valores desejados
 
             // Criação do processo para executar o comando Docker
