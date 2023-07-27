@@ -70,7 +70,7 @@ public class ControllerView implements Initializable {
 
     static Patient newPaciente = new Patient();
     ArrayList<String> titleList = new ArrayList<>();
- 
+    ArrayList<Button> buttonsList = new ArrayList<>();
 
     public void onOpenDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
@@ -109,37 +109,36 @@ public class ControllerView implements Initializable {
                 if (newPaciente != null) {
                     addPatient(newPaciente);
                     createContainer(newPaciente);
-                    ControllerChart controllerChart = new ControllerChart();
+                    ControllerChart controllerChart = new ControllerChart(ControllerView.this);
                     controllerChart.initialize(newPaciente);
                 }
 
             }
 
-            
         });
     }
 
     private void createContainer(Patient newPaciente) {
         String port = newPaciente.getPort() + ":8080";
-        String containerName =  Integer.toString(newPaciente.getIdPaciente())  + newPaciente.getFirstName();
+        String containerName = Integer.toString(newPaciente.getIdPaciente()) + newPaciente.getFirstName();
         System.out.println(port);
         try {
             String dockerCommand = "docker";
-            String[] dockerArgs = { "run", "-p", port, "--name", containerName,"shhcapi" };
+            String[] dockerArgs = { "run", "-p", port, "--name", containerName, "shhcapi" };
 
             // Criação do processo para executar o comando Docker
             ProcessBuilder processBuilder = new ProcessBuilder(dockerArgs);
             processBuilder.command().add(0, dockerCommand);
-            processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
+            processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o
+                                        // processo Docker
             processBuilder.start();
-            
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-   
+
     }
-    
+
     public void newButtonPaciente(Tab newTab, Patient paciente) {
         Button button = new Button("");
 
@@ -154,10 +153,11 @@ public class ControllerView implements Initializable {
         button.setLayoutY(button_Add.getLayoutY());
         button.setPrefWidth(59);
         button.setPrefHeight(59);
+        button.setId(paciente.getIdPaciente() + paciente.getFirstName());
         Color color = Color.web("#007acc");
         Background background = new Background(new BackgroundFill(color, new CornerRadii(100), null));
         button.setBackground(background);
-
+        buttonsList.add(button);
         Anchor_Pac.getChildren().add(button);
 
         button.setOnAction(new EventHandler<ActionEvent>() {
@@ -244,6 +244,21 @@ public class ControllerView implements Initializable {
     // metodo para receber as informações do paciente do ControllerDailog
     public static void paciente(Patient newPatient) {
         newPaciente = newPatient;
+    }
+
+    public void patientStats(Patient errorPaciente, int stats) {
+        Color color;
+        if (stats == 0) {
+            color = Color.web("#007acc");
+        } else {
+            color = Color.web("#F0BE00");
+        }
+        Background background = new Background(new BackgroundFill(color, new CornerRadii(100), null));
+        for (Button b : buttonsList) {
+            if (b.getId().equals(errorPaciente.getIdPaciente() + errorPaciente.getFirstName())) {
+                b.setBackground(background);
+            }
+        }
     }
 
 }
