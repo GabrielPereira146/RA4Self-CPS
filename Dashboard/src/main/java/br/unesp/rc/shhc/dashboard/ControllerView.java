@@ -30,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -67,6 +68,42 @@ public class ControllerView implements Initializable {
 
     @FXML
     private Label labelWeight;
+
+    @FXML
+    private Pane paneAir;
+
+    @FXML
+    private Pane paneBlood;
+
+    @FXML
+    private Pane paneGlucose;
+
+    @FXML
+    private Pane paneHeart;
+
+    @FXML
+    private Pane paneOxygen;
+
+    @FXML
+    private Pane paneTemp;
+
+    @FXML
+    private Label labelAir;
+
+    @FXML
+    private Label labelBlood;
+
+    @FXML
+    private Label labelGlucose;
+
+    @FXML
+    private Label labelHeart;
+
+    @FXML
+    private Label labelOxygen;
+
+    @FXML
+    private Label labelTemp;
 
     static Patient newPaciente = new Patient();
     ArrayList<String> titleList = new ArrayList<>();
@@ -111,6 +148,12 @@ public class ControllerView implements Initializable {
                     createContainer(newPaciente);
                     ControllerChart controllerChart = new ControllerChart(ControllerView.this);
                     controllerChart.initialize(newPaciente);
+                    paneAir.setVisible(true);
+                    paneBlood.setVisible(true);
+                    paneGlucose.setVisible(true);
+                    paneHeart.setVisible(true);
+                    paneOxygen.setVisible(true);
+                    paneTemp.setVisible(true);
                 }
 
             }
@@ -204,7 +247,7 @@ public class ControllerView implements Initializable {
             lineChart.setTitle(titleList.get(i));
             lineChart.setPrefSize(286, 220);
             lineChart.setMaxSize(286, 220);
-
+   
             if (i != 5) {
                 lineChart.setLegendVisible(false);
             }
@@ -259,6 +302,48 @@ public class ControllerView implements Initializable {
                 b.setBackground(background);
             }
         }
+    }
+
+    public void tempAnalysis(int value) {
+        Color color;
+        if (value >= 36 && value < 37) {
+            color = Color.web("#e3fbe3");
+            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+            paneTemp.setBackground(background);
+            labelTemp.setText("Normal");
+            labelTemp.setTextFill(Color.web("#4fe40b"));
+        } else if (value >= 37 && value < 38) {
+            color = Color.web("#ffffe0");
+            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+            paneTemp.setBackground(background);
+            labelTemp.setText("Febril");
+            labelTemp.setTextFill(Color.web("#ffbf00"));
+        } else if (value >= 38 && value < 39) {
+            color = Color.web("#ffe0b5");
+            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+            paneTemp.setBackground(background);
+            labelTemp.setText("Febre");
+            labelTemp.setTextFill(Color.web("#ff8c00"));
+        } else if (value >= 39 && value < 40) {
+            color = Color.web("#ffd8d4");
+            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+            paneTemp.setBackground(background);
+            labelTemp.setText("Febre alta");
+            labelTemp.setTextFill(Color.web("#ff0000"));
+        } else if (value >= 40 && value < 42) {
+            color = Color.web("#e0bcdd");
+            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+            paneTemp.setBackground(background);
+            labelTemp.setText("Febre altissima");
+            labelTemp.setTextFill(Color.web("#993399"));
+        } else {
+            color = Color.web("#ffffff");
+            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+            paneTemp.setBackground(background);
+            labelTemp.setText("ERRO");
+            labelTemp.setTextFill(Color.web("#000000"));
+        }
+
     }
 
 }

@@ -42,13 +42,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <VBox maxHeight="1.7976931348623157E308" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.rc.shhc.dashboard.ControllerView">
   <children>
-    <SplitPane dividerPositions="0.08, 0.8239" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="500.0" pickOnBounds="false" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.0689, 0.5" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="500.0" pickOnBounds="false" VBox.vgrow="ALWAYS">
       <items>
         <ScrollPane maxWidth="1085.0" prefHeight="776.0" prefWidth="617.0" style="-fx-background-color: #ffffff;">
                <content>
@@ -100,48 +101,98 @@
                   </TabPane>
         </children>
       </AnchorPane>
-        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="776.0" prefWidth="222.0" style="-fx-background-color: #ffffff;">
-          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" wrapText="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <textFill>
-                        <Color red="0.624" green="0.624" blue="0.624" />
-                     </textFill>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="53.0" text="Height:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="83.0" text="Weight:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="113.0" text="Age:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelHeight" layoutX="90.0" layoutY="53.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelWeight" layoutX="90.0" layoutY="83.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelAge" layoutX="90.0" layoutY="113.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-          </children>
-        </AnchorPane>
+            <SplitPane dividerPositions="0.35463659147869675" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="776.0" prefWidth="208.0">
+                <children>
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <textFill>
+                              <Color red="0.624" green="0.624" blue="0.624" />
+                           </textFill>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="53.0" text="Height:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="83.0" text="Weight:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="113.0" text="Age:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelHeight" layoutX="90.0" layoutY="53.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelWeight" layoutX="90.0" layoutY="83.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelAge" layoutX="90.0" layoutY="113.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                </children>
+              </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="208.0">
+                     <children>
+                        <Pane fx:id="paneTemp" layoutX="2.0" layoutY="10.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+                           <children>
+                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Temperature" textAlignment="CENTER" />
+                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                              <Label fx:id="labelTemp" layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneHeart" layoutX="140.0" layoutY="10.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+                           <children>
+                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Heart Rate" textAlignment="CENTER" />
+                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneGlucose" layoutX="2.0" layoutY="65.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                           <children>
+                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Glucose" textAlignment="CENTER" />
+                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneOxygen" layoutX="140.0" layoutY="65.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                           <children>
+                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="85.0" text="Pulse Oxygen" textAlignment="CENTER" />
+                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneAir" layoutX="2.0" layoutY="120.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                           <children>
+                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Air Flow" textAlignment="CENTER" />
+                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="paneBlood" layoutX="140.0" layoutY="120.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                           <children>
+                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="85.0" text="Blood Pressure" textAlignment="CENTER" />
+                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
       </items>
          <VBox.margin>
             <Insets />
