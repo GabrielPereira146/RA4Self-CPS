@@ -46,13 +46,22 @@ public class ControllerView implements Initializable {
     private AnchorPane MainAnchor_Pac;
 
     @FXML
+    private AnchorPane anchorSensors;
+
+    @FXML
     private Button button_Add;
 
     @FXML
     private Label label_add;
 
     @FXML
+    private TabPane tabPaneSensors;
+
+    @FXML
     private Tab tab_pac1;
+
+    @FXML
+    private Tab tab_sensors1;
 
     @FXML
     private TabPane tabPane;
@@ -68,42 +77,6 @@ public class ControllerView implements Initializable {
 
     @FXML
     private Label labelWeight;
-
-    @FXML
-    private Pane paneAir;
-
-    @FXML
-    private Pane paneBlood;
-
-    @FXML
-    private Pane paneGlucose;
-
-    @FXML
-    private Pane paneHeart;
-
-    @FXML
-    private Pane paneOxygen;
-
-    @FXML
-    private Pane paneTemp;
-
-    @FXML
-    private Label labelAir;
-
-    @FXML
-    private Label labelBlood;
-
-    @FXML
-    private Label labelGlucose;
-
-    @FXML
-    private Label labelHeart;
-
-    @FXML
-    private Label labelOxygen;
-
-    @FXML
-    private Label labelTemp;
 
     static Patient newPaciente = new Patient();
     ArrayList<String> titleList = new ArrayList<>();
@@ -148,12 +121,12 @@ public class ControllerView implements Initializable {
                     createContainer(newPaciente);
                     ControllerChart controllerChart = new ControllerChart(ControllerView.this);
                     controllerChart.initialize(newPaciente);
-                    paneAir.setVisible(true);
-                    paneBlood.setVisible(true);
-                    paneGlucose.setVisible(true);
-                    paneHeart.setVisible(true);
-                    paneOxygen.setVisible(true);
-                    paneTemp.setVisible(true);
+                    // paneAir.setVisible(true);
+                    // paneBlood.setVisible(true);
+                    // paneGlucose.setVisible(true);
+                    // paneHeart.setVisible(true);
+                    // paneOxygen.setVisible(true);
+                    // paneTemp.setVisible(true);
                 }
 
             }
@@ -182,7 +155,7 @@ public class ControllerView implements Initializable {
 
     }
 
-    public void newButtonPaciente(Tab newTab, Patient paciente) {
+    public void newButtonPaciente(Tab newTab, Patient paciente, Tab NewTabSensors) {
         Button button = new Button("");
 
         Image image = new Image(getClass().getResourceAsStream("icons/profile.png"));
@@ -207,6 +180,7 @@ public class ControllerView implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 tabPane.getSelectionModel().select(newTab);
+                tabPaneSensors.getSelectionModel().select(NewTabSensors);
                 labelHeight.setText(Float.toString(paciente.getHeight()));
                 labelWeight.setText(Float.toString(paciente.getWeight()));
                 labelAge.setText(Integer.toString(paciente.getAge()));
@@ -219,10 +193,12 @@ public class ControllerView implements Initializable {
         label_add.setLayoutY(label_add.getLayoutY() + 100);
     }
 
-    public void newTabPaciente(Tab newTab, Patient paciente) {
+    public void newTabPaciente(Tab newTab, Patient paciente, Tab newTabSensors) {
 
         int j = 0;
+        tabPaneSensors.getTabs().add(newTabSensors);
         tabPane.getTabs().add(newTab);
+
         AnchorPane anchorPane = new AnchorPane();
         // CRIAÇÃO DOS GRAFICOS
         anchorPane.setPrefWidth(Anchor_Pac.getPrefWidth());
@@ -247,7 +223,7 @@ public class ControllerView implements Initializable {
             lineChart.setTitle(titleList.get(i));
             lineChart.setPrefSize(286, 220);
             lineChart.setMaxSize(286, 220);
-   
+
             if (i != 5) {
                 lineChart.setLegendVisible(false);
             }
@@ -261,6 +237,35 @@ public class ControllerView implements Initializable {
         namePatient.setLayoutY(27);
         anchorPane.getChildren().addAll(namePatient);
         newTab.setContent(anchorPane);
+
+        int i = 0;
+        AnchorPane targetAnchorPane = new AnchorPane();
+        for (javafx.scene.Node node : anchorSensors.getChildren()) {
+            if (node instanceof Pane) {
+                Pane clonedPane = new Pane();
+                clonedPane.setId(titleList.get(i) + "Pane");
+                i++;
+                clonedPane.setPrefSize(((Pane) node).getWidth(), ((Pane) node).getHeight());
+                clonedPane.setStyle(((Pane) node).getStyle());
+                clonedPane.setLayoutX(((Pane) node).getLayoutX());
+                clonedPane.setLayoutY(((Pane) node).getLayoutY());
+
+                for (javafx.scene.Node paneNode : ((Pane) node).getChildren()) {
+                    if (paneNode instanceof Label) {
+                        Label clonedLabel = new Label(((Label) paneNode).getText());
+                        clonedLabel.setLayoutX(((Label) paneNode).getLayoutX());
+                        clonedLabel.setLayoutY(((Label) paneNode).getLayoutY());
+                        clonedLabel.setId(((Label) paneNode).getId());
+                        // clonedLabel.setTextFill(((Label) node).getTextFill());
+                        clonedPane.getChildren().add(clonedLabel);
+                    }
+                }
+
+                targetAnchorPane.getChildren().add(clonedPane);
+                paciente.getListPane().add(clonedPane);
+            }
+        }
+        newTabSensors.setContent(targetAnchorPane);
 
     }
 
@@ -277,10 +282,11 @@ public class ControllerView implements Initializable {
 
         // cria o novo guia com os graficos
         Tab newTab = new Tab(namePatient.getText());
-        newTabPaciente(newTab, newPaciente);
+        Tab newTabSensors = new Tab(newPaciente.getIdPaciente() + namePatient.getText() + "Sensors");
+        newTabPaciente(newTab, newPaciente, newTabSensors);
 
         // cria o botão do novo paciente
-        newButtonPaciente(newTab, newPaciente);
+        newButtonPaciente(newTab, newPaciente, newTabSensors);
 
     }
 
@@ -304,46 +310,45 @@ public class ControllerView implements Initializable {
         }
     }
 
-    public void tempAnalysis(int value) {
+    public void tempAnalysis(int value, Pane patient) {
         Color color;
+        Label labelTempe = (Label) patient.lookup("#labelTemp");
         if (value >= 36 && value < 37) {
             color = Color.web("#e3fbe3");
             Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            paneTemp.setBackground(background);
-            labelTemp.setText("Normal");
-            labelTemp.setTextFill(Color.web("#4fe40b"));
+            patient.setBackground(background);
+            labelTempe.setText("Normal");
+            labelTempe.setTextFill(Color.web("#4fe40b"));
         } else if (value >= 37 && value < 38) {
             color = Color.web("#ffffe0");
             Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            paneTemp.setBackground(background);
-            labelTemp.setText("Febril");
-            labelTemp.setTextFill(Color.web("#ffbf00"));
+            patient.setBackground(background);
+            labelTempe.setText("Febril");
+            labelTempe.setTextFill(Color.web("#ffbf00"));
         } else if (value >= 38 && value < 39) {
             color = Color.web("#ffe0b5");
             Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            paneTemp.setBackground(background);
-            labelTemp.setText("Febre");
-            labelTemp.setTextFill(Color.web("#ff8c00"));
+            patient.setBackground(background);
+            labelTempe.setText("Febre");
+            labelTempe.setTextFill(Color.web("#ff8c00"));
         } else if (value >= 39 && value < 40) {
             color = Color.web("#ffd8d4");
             Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            paneTemp.setBackground(background);
-            labelTemp.setText("Febre alta");
-            labelTemp.setTextFill(Color.web("#ff0000"));
+            patient.setBackground(background);
+            labelTempe.setText("Febre alta");
+            labelTempe.setTextFill(Color.web("#ff0000"));
         } else if (value >= 40 && value < 42) {
             color = Color.web("#e0bcdd");
             Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            paneTemp.setBackground(background);
-            labelTemp.setText("Febre altissima");
-            labelTemp.setTextFill(Color.web("#993399"));
+            patient.setBackground(background);
+            labelTempe.setText("Febre altissima");
+            labelTempe.setTextFill(Color.web("#993399"));
         } else {
             color = Color.web("#ffffff");
             Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            paneTemp.setBackground(background);
-            labelTemp.setText("ERRO");
-            labelTemp.setTextFill(Color.web("#000000"));
+            patient.setBackground(background);
+            labelTempe.setText("ERRO");
+            labelTempe.setTextFill(Color.web("#000000"));
         }
-
     }
-
 }

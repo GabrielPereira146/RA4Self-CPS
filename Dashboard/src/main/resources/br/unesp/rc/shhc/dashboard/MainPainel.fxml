@@ -47,13 +47,13 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="1.7976931348623157E308" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.rc.shhc.dashboard.ControllerView">
+<VBox minHeight="600.0" minWidth="1360.0" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.rc.shhc.dashboard.ControllerView">
   <children>
-    <SplitPane dividerPositions="0.0689, 0.5" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="500.0" pickOnBounds="false" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.015, 0.7847" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="500.0" pickOnBounds="false" VBox.vgrow="ALWAYS">
       <items>
-        <ScrollPane maxWidth="1085.0" prefHeight="776.0" prefWidth="617.0" style="-fx-background-color: #ffffff;">
+        <ScrollPane maxWidth="100.0" minWidth="110.0" prefHeight="776.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" SplitPane.resizableWithParent="false">
                <content>
-              <AnchorPane fx:id="Anchor_Pac" maxHeight="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" prefHeight="800.0" prefWidth="0.0" style="-fx-background-color: #ffffff;">
+              <AnchorPane fx:id="Anchor_Pac" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="790.0" prefWidth="95.0" style="-fx-background-color: #ffffff; he: 1;">
                 <children>
                   <Label alignment="CENTER" layoutX="12.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Pacientes" textAlignment="CENTER" wrapText="false">
                     <font>
@@ -63,7 +63,7 @@
                       <Color red="0.624" green="0.624" blue="0.624" />
                     </textFill>
                   </Label>
-                        <Button fx:id="button_Add" layoutX="23.0" layoutY="55.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="59.0" style="-fx-background-radius: 100; -fx-background-color: #bbbbbb;">
+                        <Button fx:id="button_Add" layoutX="23.0" layoutY="55.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="59.0" style="-fx-background-radius: 100; -fx-background-color: #bbbbbb;" textAlignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -72,12 +72,15 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label fx:id="label_add" alignment="CENTER" layoutX="3.0" layoutY="120.0" prefHeight="17.0" prefWidth="93.0" text="ADD" textAlignment="CENTER" />
+                        <Label fx:id="label_add" alignment="CENTER" layoutX="6.0" layoutY="120.0" prefHeight="17.0" prefWidth="93.0" text="ADD" textAlignment="CENTER" />
                 </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
               </AnchorPane>
                </content>
         </ScrollPane>
-      <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="776.0" prefWidth="895.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane id="Content" nodeOrientation="LEFT_TO_RIGHT" prefHeight="798.0" prefWidth="961.0" style="-fx-background-color: #ffffff;">
         <children>
                   <TabPane fx:id="tabPane" layoutY="-35.0" prefWidth="973.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -101,9 +104,9 @@
                   </TabPane>
         </children>
       </AnchorPane>
-            <SplitPane dividerPositions="0.35463659147869675" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+            <SplitPane dividerPositions="0.8" maxWidth="265.0" minHeight="430.0" minWidth="265.0" mouseTransparent="true" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="200.0" prefWidth="265.0">
               <items>
-              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="776.0" prefWidth="208.0">
+              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="776.0" prefWidth="200.0">
                 <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" wrapText="false">
                            <font>
@@ -145,50 +148,62 @@
                         </Label>
                 </children>
               </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="208.0">
+                  <AnchorPane prefHeight="264.0" prefWidth="180.0">
                      <children>
-                        <Pane fx:id="paneTemp" layoutX="2.0" layoutY="10.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;">
-                           <children>
-                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Temperature" textAlignment="CENTER" />
-                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                              <Label fx:id="labelTemp" layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="paneHeart" layoutX="140.0" layoutY="10.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;">
-                           <children>
-                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Heart Rate" textAlignment="CENTER" />
-                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="paneGlucose" layoutX="2.0" layoutY="65.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
-                           <children>
-                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Glucose" textAlignment="CENTER" />
-                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="paneOxygen" layoutX="140.0" layoutY="65.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
-                           <children>
-                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="85.0" text="Pulse Oxygen" textAlignment="CENTER" />
-                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="paneAir" layoutX="2.0" layoutY="120.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
-                           <children>
-                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Air Flow" textAlignment="CENTER" />
-                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="paneBlood" layoutX="140.0" layoutY="120.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
-                           <children>
-                              <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="85.0" text="Blood Pressure" textAlignment="CENTER" />
-                              <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                              <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
-                           </children>
-                        </Pane>
+                        <TabPane fx:id="tabPaneSensors" layoutY="-37.0" maxHeight="215.0" minHeight="215.0" prefHeight="215.0" prefWidth="265.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab fx:id="tab_sensors1" text="Paciente 1">
+                                 <content>
+                                  <AnchorPane fx:id="anchorSensors" maxHeight="180.0" minHeight="180.0" minWidth="0.0" prefHeight="180.0" prefWidth="265.0">
+                                       <children>
+                                          <Pane fx:id="paneTemp" layoutX="2.0" layoutY="10.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                                             <children>
+                                                <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Temperature" textAlignment="CENTER" />
+                                                <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                                                <Label fx:id="labelTemp" layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="paneHeart" layoutX="140.0" layoutY="10.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                                             <children>
+                                                <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Heart Rate" textAlignment="CENTER" />
+                                                <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="paneGlucose" layoutX="2.0" layoutY="65.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                                             <children>
+                                                <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Glucose" textAlignment="CENTER" />
+                                                <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="paneOxygen" layoutX="140.0" layoutY="65.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                                             <children>
+                                                <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="85.0" text="Pulse Oxygen" textAlignment="CENTER" />
+                                                <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="paneAir" layoutX="2.0" layoutY="120.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                                             <children>
+                                                <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Air Flow" textAlignment="CENTER" />
+                                                <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                             </children>
+                                          </Pane>
+                                          <Pane fx:id="paneBlood" layoutX="140.0" layoutY="120.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
+                                             <children>
+                                                <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="85.0" text="Blood Pressure" textAlignment="CENTER" />
+                                                <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
+                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
                      </children>
                   </AnchorPane>
               </items>

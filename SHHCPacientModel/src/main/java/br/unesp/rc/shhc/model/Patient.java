@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.chart.LineChart;
+import javafx.scene.layout.Pane;
 
 
 public class Patient {
@@ -16,6 +17,7 @@ public class Patient {
     private int age;
     private String port;
     private List<LineChart<String, Number>> listCharts = new ArrayList<>();
+    private List<Pane> listPane = new ArrayList<>();
 
     public Patient() {
         
@@ -141,6 +143,17 @@ public class Patient {
     public void setListCharts(List<LineChart<String, Number>> listCharts) {
         this.listCharts = listCharts;
     }
+
+
+    public List<Pane> getListPane() {
+        return listPane;
+    }
+
+
+    public void setListPane(List<Pane> listPane) {
+        this.listPane = listPane;
+    }
     
+
 
 }
