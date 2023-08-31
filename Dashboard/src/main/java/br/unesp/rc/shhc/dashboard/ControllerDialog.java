@@ -1,12 +1,12 @@
 package br.unesp.rc.shhc.dashboard;
 
+import br.unesp.rc.shhc.SHHCPacientModel.model.Patient;
+import br.unesp.rc.shhc.SHHCPacientModel.repository.PatientRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import br.unesp.rc.shhc.model.*;
-import br.unesp.rc.shhc.repository.PatientRepository;
 
 public class ControllerDialog {
 

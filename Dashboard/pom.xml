@@ -21,18 +21,18 @@
             <version>19.0.2.1</version>
         </dependency>
         <dependency>
-            <groupId>br.unesp.rc.shhc.model</groupId>
-            <artifactId>SHHCMavenModel</artifactId>
+            <groupId>br.unesp.rc.shhc</groupId>
+            <artifactId>SHHCModel</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>br.unesp.rc.shhc</groupId>
-            <artifactId>HttpClientMaven</artifactId>
+            <groupId>br.unesp.rc</groupId>
+            <artifactId>HttpClientUtils</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>br.unesp.rc.shhc</groupId>
-            <artifactId>GsonUtilsMaven</artifactId>
+            <groupId>br.unesp.rc</groupId>
+            <artifactId>GsonUtils</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

@@ -8,7 +8,7 @@ import br.unesp.rc.shhc.Glucose;
 import br.unesp.rc.shhc.HeartRate;
 import br.unesp.rc.shhc.PulseOxygen;
 import br.unesp.rc.shhc.Temperature;
-import br.unesp.rc.shhc.model.Patient;
+import br.unesp.rc.shhc.SHHCPacientModel.model.Patient;
 import javafx.animation.AnimationTimer;
 import javafx.scene.chart.XYChart;
 

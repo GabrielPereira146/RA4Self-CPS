@@ -45,16 +45,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="407.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.rc.shhc.panel.Controller">
+<VBox prefHeight="422.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.rc.shhc.panel.Controller">
   <children>
-    <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="492.0" prefWidth="601.0" style="-fx-background-color: #efefef;" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="mainPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="422.0" prefWidth="514.0" style="-fx-background-color: #efefef;" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fitHeight="376.0" fitWidth="199.0" layoutX="179.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="377.0" fitWidth="110.0" layoutX="207.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/corpo.png" />
                </image>
             </ImageView>
-            <Pane fx:id="PaneHeartRate" layoutX="533.0" layoutY="9.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+            <Pane fx:id="PaneHeartRate" layoutX="399.0" layoutY="7.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                <children>
                   <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="45.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,7 +66,7 @@
                         <Font name="Franklin Gothic Medium" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="33.0" layoutY="94.0" prefHeight="17.0" prefWidth="60.0" text="Heart Rate" textAlignment="CENTER" textFill="#bbbbbb" />
+                  <Label alignment="CENTER" layoutX="3.0" layoutY="103.0" prefHeight="17.0" prefWidth="124.0" text="Heart Rate" textAlignment="CENTER" textFill="#bbbbbb" />
                   <Label layoutX="67.0" layoutY="68.0" text="bpm">
                      <font>
                         <Font name="Franklin Gothic Medium" size="15.0" />
@@ -79,9 +79,9 @@
                   </Spinner>
                </children>
             </Pane>
-            <Pane fx:id="PaneTemperature" layoutX="401.0" layoutY="9.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+            <Pane fx:id="PaneTemperature" layoutY="7.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                <children>
-                  <Label layoutX="29.0" layoutY="94.0" prefHeight="17.0" prefWidth="68.0" text="Temperature" textAlignment="CENTER" textFill="#bbbbbb" />
+                  <Label alignment="CENTER" layoutY="103.0" prefHeight="17.0" prefWidth="125.0" text="Temperature" textAlignment="CENTER" textFill="#bbbbbb" />
                   <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="45.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/temperature-icon.png" />
@@ -102,14 +102,14 @@
                   </Spinner>
                </children>
             </Pane>
-            <Pane fx:id="PaneAirFlow" layoutX="533.0" layoutY="139.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+            <Pane fx:id="PaneAirFlow" layoutX="399.0" layoutY="145.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                <children>
                   <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="45.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/air-flow-icon.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="40.0" layoutY="94.0" prefHeight="17.0" prefWidth="45.0" text="Air Flow" textFill="#bbbbbb" />
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="103.0" prefHeight="17.0" prefWidth="124.0" text="Air Flow" textFill="#bbbbbb" />
                   <Label layoutX="67.0" layoutY="68.0" text="mrm">
                      <font>
                         <Font name="Franklin Gothic Medium" size="15.0" />
@@ -122,14 +122,14 @@
                   </Spinner>
                </children>
             </Pane>
-            <Pane fx:id="PaneGlucose" layoutX="401.0" layoutY="139.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+            <Pane fx:id="PaneGlucose" layoutY="145.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                <children>
                   <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="45.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/glucose-icon.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="40.0" layoutY="94.0" prefHeight="17.0" prefWidth="45.0" text="Glucose" textAlignment="CENTER" textFill="#bbbbbb" />
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="103.0" prefHeight="17.0" prefWidth="124.0" text="Glucose" textAlignment="CENTER" textFill="#bbbbbb" />
                   <Label layoutX="67.0" layoutY="68.0" text="mg/d">
                      <font>
                         <Font name="Franklin Gothic Medium" size="15.0" />
@@ -142,14 +142,14 @@
                   </Spinner>
                </children>
             </Pane>
-            <Pane fx:id="PaneBloodPressure" layoutX="401.0" layoutY="270.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+            <Pane fx:id="PaneBloodPressure" layoutY="282.0" prefHeight="133.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                <children>
                   <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="45.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/blood-pressure-icon.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="26.0" layoutY="94.0" prefHeight="17.0" prefWidth="82.0" text="Blood Pressure" textAlignment="CENTER" textFill="#bbbbbb" />
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="107.0" prefHeight="17.0" prefWidth="124.0" text="Blood Pressure" textAlignment="CENTER" textFill="#bbbbbb" />
                   <Label layoutX="43.0" layoutY="61.0" text="/">
                      <font>
                         <Font name="Franklin Gothic Medium" size="18.0" />
@@ -172,14 +172,14 @@
                   </Spinner>
                </children>
             </Pane>
-            <Pane fx:id="PanePulseOxygen" layoutX="533.0" layoutY="270.0" prefHeight="125.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+            <Pane fx:id="PanePulseOxygen" layoutX="399.0" layoutY="282.0" prefHeight="133.0" prefWidth="125.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                <children>
                   <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="45.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/pulse-oxygem-icon.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="26.0" layoutY="94.0" prefHeight="17.0" prefWidth="74.0" text="Pulse Oxygen" textAlignment="CENTER" textFill="#bbbbbb" />
+                  <Label alignment="CENTER" layoutY="111.0" prefHeight="17.0" prefWidth="124.0" text="Pulse Oxygen" textAlignment="CENTER" textFill="#bbbbbb" />
                   <Label layoutX="67.0" layoutY="68.0" text="\%">
                      <font>
                         <Font name="Franklin Gothic Medium" size="15.0" />
@@ -192,11 +192,11 @@
                   </Spinner>
                </children>
             </Pane>
-            <Pane fx:id="PaneServer" layoutX="179.0" layoutY="14.0" prefHeight="36.0" prefWidth="199.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+            <Pane fx:id="PaneServer" layoutX="127.0" layoutY="7.0" prefHeight="36.0" prefWidth="270.0" style="-fx-background-color: white; -fx-background-radius: 5;">
                <children>
-                  <Label layoutX="14.0" layoutY="6.0" prefHeight="25.0" text="ID Patient" textFill="#bbbbbb" />
-                  <TextField fx:id="textServerPort" layoutX="74.0" layoutY="6.0" prefHeight="25.0" prefWidth="60.0" stylesheets="@Style.css" text="8080" />
-                  <Button fx:id="buttonServer" layoutX="120.0" layoutY="6.0" mnemonicParsing="false" stylesheets="@Style.css" text="CHANGE" textFill="WHITE">
+                  <Label layoutX="14.0" prefHeight="36.0" prefWidth="92.0" text="ID Patient" textFill="#bbbbbb" />
+                  <TextField fx:id="textServerPort" layoutX="106.0" layoutY="7.0" prefHeight="24.0" prefWidth="60.0" stylesheets="@../../../../../../../../../../../../../Desktop/javaRestAPI-main/ControlPanelJavafx/src/main/resources/br/unesp/rc/shhc/panel/Style.css" text="8080" />
+                  <Button fx:id="buttonServer" layoutX="187.0" layoutY="7.0" mnemonicParsing="false" stylesheets="@../../../../../../../../../../../../../Desktop/javaRestAPI-main/ControlPanelJavafx/src/main/resources/br/unesp/rc/shhc/panel/Style.css" text="CHANGE" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

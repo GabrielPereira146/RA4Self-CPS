@@ -1,7 +1,8 @@
-C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\ShhcSensorAPI\src\main\java\br\unesp\rc\shhc\resource\HeartRateResource.java
-C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\ShhcSensorAPI\src\main\java\br\unesp\rc\shhc\resource\GlucoseResource.java
-C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\ShhcSensorAPI\src\main\java\br\unesp\rc\shhc\resource\PulseOxygenResource.java
-C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\ShhcSensorAPI\src\main\java\br\unesp\rc\shhc\resource\AirFlowResource.java
-C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\ShhcSensorAPI\src\main\java\br\unesp\rc\shhc\resource\BloodPressureResource.java
-C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\ShhcSensorAPI\src\main\java\br\unesp\rc\shhc\resource\TemperatureResource.java
-C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\ShhcSensorAPI\src\main\java\br\unesp\rc\shhc\ShhcApplication.java
+C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\SHHCSensorAPI\src\main\java\br\unesp\rc\shhc\SHHCSensorAPI\filter\CustomFilter.java
+C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\SHHCSensorAPI\src\main\java\br\unesp\rc\shhc\SHHCSensorAPI\resources\TemperatureResource.java
+C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\SHHCSensorAPI\src\main\java\br\unesp\rc\shhc\SHHCSensorAPI\resources\BloodPressureResource.java
+C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\SHHCSensorAPI\src\main\java\br\unesp\rc\shhc\SHHCSensorAPI\resources\HeartRateResource.java
+C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\SHHCSensorAPI\src\main\java\br\unesp\rc\shhc\SHHCSensorAPI\resources\PulseOxygenResource.java
+C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\SHHCSensorAPI\src\main\java\br\unesp\rc\shhc\SHHCSensorAPI\ShhcSensorApiApplication.java
+C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\SHHCSensorAPI\src\main\java\br\unesp\rc\shhc\SHHCSensorAPI\resources\GlucoseResource.java
+C:\Users\gabri\OneDrive\Documentos\UNESP\GitProject\javaRestAPI\SHHCSensorAPI\src\main\java\br\unesp\rc\shhc\SHHCSensorAPI\resources\AirFlowResource.java

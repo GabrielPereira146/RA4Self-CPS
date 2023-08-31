@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import br.unesp.rc.shhc.model.Patient;
-import br.unesp.rc.shhc.repository.PatientRepository;
+import br.unesp.rc.shhc.SHHCPacientModel.model.Patient;
+import br.unesp.rc.shhc.SHHCPacientModel.repository.PatientRepository;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,7 +23,6 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;

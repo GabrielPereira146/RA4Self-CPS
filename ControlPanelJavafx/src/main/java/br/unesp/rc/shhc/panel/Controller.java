@@ -3,14 +3,14 @@ package br.unesp.rc.shhc.panel;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
 import br.unesp.rc.gson.utils.GsonUtils;
-import br.unesp.rc.shhc.Temperature;
-import br.unesp.rc.shhc.Glucose;
-import br.unesp.rc.shhc.AirFlow;
-import br.unesp.rc.shhc.PulseOxygen;
-import br.unesp.rc.shhc.BloodPressure;
-import br.unesp.rc.shhc.HeartRate;
+import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
+import br.unesp.rc.shhc.SHHCModel.model.AirFlow;
+import br.unesp.rc.shhc.SHHCModel.model.PulseOxygen;
+import br.unesp.rc.shhc.SHHCModel.model.BloodPressure;
+import br.unesp.rc.shhc.SHHCModel.model.Glucose;
+import br.unesp.rc.shhc.SHHCModel.model.HeartRate;
+import br.unesp.rc.shhc.SHHCModel.model.Temperature;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -56,10 +56,9 @@ public class Controller implements Initializable {
     private TextField textServerPort;
 
     String URL = "http://localhost:";
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        URL = URL.concat(textServerPort.getText());
 
         spinnerTemperature.valueProperty().addListener(new ChangeListener<Integer>() {
 
@@ -67,14 +66,14 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int temperature = spinnerTemperature.getValue();
                 System.out.println("Temperature Value: " + temperature);
-                String URL_Temp = "/shhc/Temperature/update";
-                URL_Temp = URL.concat(URL_Temp);
+                String URL = "http://localhost:8084/shhc/Temperature/update";
 
                 Temperature temp = new Temperature(temperature, "Online", "1");
                 String json = GsonUtils.objetoToJson(temp);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL_Temp, json);
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
                 } catch (Exception e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -87,13 +86,13 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int airflow = SpinnerAir.getValue();
                 System.out.println(airflow);
-                String URL_Air = "/shhc/AirFlow/update";
-                URL_Air = URL.concat(URL_Air);
+                String URL = "http://localhost:8084/shhc/AirFlow/update";
                 AirFlow air = new AirFlow(airflow, "Online", "4");
                 String json = GsonUtils.objetoToJson(air);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL_Air, json);
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
                 } catch (Exception e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
@@ -107,13 +106,13 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int glucose = SpinnerGlucose.getValue();
                 System.out.println(glucose);
-                String URL_Glucose = "/shhc/Glucose/update";
-                URL_Glucose = URL.concat(URL_Glucose);
+                String URL = "http://localhost:8084/shhc/Glucose/update";
                 Glucose glu = new Glucose(glucose, "Online", "2");
                 String json = GsonUtils.objetoToJson(glu);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL_Glucose, json);
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
                 } catch (Exception e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -126,13 +125,13 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int heartrate = SpinnerHeart.getValue();
                 System.out.println(heartrate);
-                String URL_Heart = "/shhc/HeartRate/update";
-                URL_Heart = URL.concat(URL_Heart);
+                String URL = "http://localhost:8084/shhc/HeartRate/update";
                 HeartRate hr = new HeartRate(heartrate, "Online", "5");
                 String json = GsonUtils.objetoToJson(hr);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL_Heart, json);
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
                 } catch (Exception e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
@@ -146,13 +145,13 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int oxygenP = SpinnerOxygen.getValue();
                 System.out.println(oxygenP);
-                String URL_Oxygen = "/shhc/PulseOxygen/update";
-                URL_Oxygen = URL.concat(URL_Oxygen);
+                String URL = "http://localhost:8084/shhc/PulseOxygen/update";
                 PulseOxygen oxyg = new PulseOxygen(oxygenP, "Online", "3");
                 String json = GsonUtils.objetoToJson(oxyg);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL_Oxygen, json);
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
                 } catch (Exception e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
@@ -166,13 +165,13 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
                 int systolic = spinnerSystolicBP.getValue();
                 int diastolic = spinnerDiastolicBP.getValue();
-                String URL_Blood = "/shhc/BloodPressure/update";
-                URL_Blood = URL.concat(URL_Blood);
+                String URL = "http://localhost:8084/shhc/BloodPressure/update";
                 BloodPressure bloodP = new BloodPressure(diastolic, systolic, "Online", "6");
                 String json = GsonUtils.objetoToJson(bloodP);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL_Blood, json);
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
                 } catch (Exception e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -185,23 +184,22 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
                 int systolic = spinnerSystolicBP.getValue();
                 int diastolic = spinnerDiastolicBP.getValue();
-                String URL_Blood = "/shhc/BloodPressure/update";
-                URL_Blood = URL.concat(URL_Blood);
+                String URL = "http://localhost:8084/shhc/BloodPressure/update";
                 BloodPressure bloodP = new BloodPressure(diastolic, systolic, "Online", "6");
                 String json = GsonUtils.objetoToJson(bloodP);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL_Blood, json);
+                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
                 } catch (Exception e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
         });
 
-
         buttonServer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                URL = URL.substring(0, URL.length()-4);
+                URL = URL.substring(0, URL.length() - 4);
                 URL = URL.concat(textServerPort.getText());
                 System.out.println(URL);
             }

@@ -6,18 +6,18 @@
     "configurations": [
         {
             "type": "java",
-            "name": "ControlPanel",
+            "name": "App",
             "request": "launch",
-            "mainClass": "br.unesp.rc.shhc.panel.ControlPanel",
-            "projectName": "ControlPanelJavafx",
+            "mainClass": "br.unesp.rc.shhc.panel.App",
+            "projectName": "",
             "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
-            "name": "ShhcApplication",
+            "name": "ShhcSensorApiApplication",
             "request": "launch",
-            "mainClass": "br.unesp.rc.shhc.ShhcApplication",
-            "projectName": "ShhcSensorAPI"
+            "mainClass": "br.unesp.rc.shhc.SHHCSensorAPI.ShhcSensorApiApplication",
+            "projectName": ""
         },
         {
             "type": "java",
@@ -32,21 +32,6 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "br.unesp.rc.shhc.view.ControlPanel",
-            "projectName": "ControlPanelJavafx",
-            "vmArgs": "--module-path D:/Downloads/javafx-sdk-19.0.2.1/lib --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
-            "name": "SshcApplication",
-            "request": "launch",
-            "mainClass": "br.unesp.rc.sshc.SshcApplication",
-            "projectName": "ShhcSensorAPI"
         }
     ]
 }
