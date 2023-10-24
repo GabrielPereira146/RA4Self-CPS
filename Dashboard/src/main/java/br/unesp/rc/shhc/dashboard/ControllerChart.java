@@ -2,12 +2,12 @@ package br.unesp.rc.shhc.dashboard;
 
 import br.unesp.rc.gson.utils.GsonUtils;
 import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
-import br.unesp.rc.shhc.AirFlow;
-import br.unesp.rc.shhc.BloodPressure;
-import br.unesp.rc.shhc.Glucose;
-import br.unesp.rc.shhc.HeartRate;
-import br.unesp.rc.shhc.PulseOxygen;
-import br.unesp.rc.shhc.Temperature;
+import br.unesp.rc.shhc.SHHCModel.model.AirFlow;
+import br.unesp.rc.shhc.SHHCModel.model.BloodPressure;
+import br.unesp.rc.shhc.SHHCModel.model.Glucose;
+import br.unesp.rc.shhc.SHHCModel.model.HeartRate;
+import br.unesp.rc.shhc.SHHCModel.model.PulseOxygen;
+import br.unesp.rc.shhc.SHHCModel.model.Temperature;
 import br.unesp.rc.shhc.SHHCPacientModel.model.Patient;
 import javafx.animation.AnimationTimer;
 import javafx.scene.chart.XYChart;

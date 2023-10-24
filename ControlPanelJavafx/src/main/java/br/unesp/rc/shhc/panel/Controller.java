@@ -59,6 +59,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    URL = URL.concat(textServerPort.getText());
 
         spinnerTemperature.valueProperty().addListener(new ChangeListener<Integer>() {
 
@@ -66,12 +67,11 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int temperature = spinnerTemperature.getValue();
                 System.out.println("Temperature Value: " + temperature);
-                String URL = "http://localhost:8084/shhc/Temperature/update";
-
+                String url = URL + "/shhc/Temperature/update";
                 Temperature temp = new Temperature(temperature, "Online", "1");
                 String json = GsonUtils.objetoToJson(temp);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                    CustomHttpClientUtils.setValueByHttpPut(url, json);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -86,11 +86,11 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int airflow = SpinnerAir.getValue();
                 System.out.println(airflow);
-                String URL = "http://localhost:8084/shhc/AirFlow/update";
+                String url = URL + "/shhc/AirFlow/update";
                 AirFlow air = new AirFlow(airflow, "Online", "4");
                 String json = GsonUtils.objetoToJson(air);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                    CustomHttpClientUtils.setValueByHttpPut(url, json);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -106,11 +106,11 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int glucose = SpinnerGlucose.getValue();
                 System.out.println(glucose);
-                String URL = "http://localhost:8084/shhc/Glucose/update";
+                String url = URL + "/shhc/Glucose/update";
                 Glucose glu = new Glucose(glucose, "Online", "2");
                 String json = GsonUtils.objetoToJson(glu);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                    CustomHttpClientUtils.setValueByHttpPut(url, json);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -125,11 +125,11 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int heartrate = SpinnerHeart.getValue();
                 System.out.println(heartrate);
-                String URL = "http://localhost:8084/shhc/HeartRate/update";
+                String url = URL + "/shhc/HeartRate/update";
                 HeartRate hr = new HeartRate(heartrate, "Online", "5");
                 String json = GsonUtils.objetoToJson(hr);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                    CustomHttpClientUtils.setValueByHttpPut(url, json);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -145,11 +145,11 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> arg0, Integer arg1, Integer arg2) {
                 int oxygenP = SpinnerOxygen.getValue();
                 System.out.println(oxygenP);
-                String URL = "http://localhost:8084/shhc/PulseOxygen/update";
+                String url = URL + "/shhc/PulseOxygen/update";
                 PulseOxygen oxyg = new PulseOxygen(oxygenP, "Online", "3");
                 String json = GsonUtils.objetoToJson(oxyg);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                    CustomHttpClientUtils.setValueByHttpPut(url, json);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -165,11 +165,11 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
                 int systolic = spinnerSystolicBP.getValue();
                 int diastolic = spinnerDiastolicBP.getValue();
-                String URL = "http://localhost:8084/shhc/BloodPressure/update";
+                String url = URL + "/shhc/BloodPressure/update";
                 BloodPressure bloodP = new BloodPressure(diastolic, systolic, "Online", "6");
                 String json = GsonUtils.objetoToJson(bloodP);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                    CustomHttpClientUtils.setValueByHttpPut(url, json);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -184,11 +184,11 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
                 int systolic = spinnerSystolicBP.getValue();
                 int diastolic = spinnerDiastolicBP.getValue();
-                String URL = "http://localhost:8084/shhc/BloodPressure/update";
+                String url = URL + "/shhc/BloodPressure/update";
                 BloodPressure bloodP = new BloodPressure(diastolic, systolic, "Online", "6");
                 String json = GsonUtils.objetoToJson(bloodP);
                 try {
-                    CustomHttpClientUtils.setValueByHttpPut(URL, json);
+                    CustomHttpClientUtils.setValueByHttpPut(url, json);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
