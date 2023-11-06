@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import br.unesp.rc.shhc.SHHCPacientModel.model.Patient;
 import br.unesp.rc.shhc.SHHCPacientModel.repository.PatientRepository;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,6 +52,9 @@ public class ControllerView implements Initializable {
     private Button button_Add;
 
     @FXML
+    private Button button_Close;
+
+    @FXML
     private Label label_add;
 
     @FXML
@@ -80,6 +84,7 @@ public class ControllerView implements Initializable {
     static Patient newPaciente = new Patient();
     ArrayList<String> titleList = new ArrayList<>();
     ArrayList<Button> buttonsList = new ArrayList<>();
+    ArrayList<String> idContainersList = new ArrayList<>();
 
     public void onOpenDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
@@ -131,6 +136,54 @@ public class ControllerView implements Initializable {
             }
 
         });
+        button_Close.setOnAction(e -> {
+            cleanContainers();
+            Platform.exit();
+        });
+    }
+    private void cleanContainers() {
+        for (String container : idContainersList) {
+            try {
+                // Comando para parar o contêiner por ID
+                String dockerCommand = "docker";
+                String[] dockerArgsStop = { "stop", container };
+        
+                // Criação do processo para executar o comando Docker
+                ProcessBuilder processBuilderStop = new ProcessBuilder(dockerArgsStop);
+                processBuilderStop.command().add(0, dockerCommand);
+                processBuilderStop.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
+                Process processStop = processBuilderStop.start();
+                processStop.waitFor(); // Aguarda o término do processo de parada
+        
+                int exitCodeStop = processStop.exitValue();
+        
+                if (exitCodeStop == 0) {
+                    System.out.println("Contêiner parado com sucesso.");
+                } else {
+                    System.err.println("Erro ao parar o contêiner. Código de saída: " + exitCodeStop);
+                }
+    
+                // Comando para remover o contêiner por ID
+                String[] dockerArgsRm = { "rm", container };
+        
+                // Criação do processo para executar o comando Docker
+                ProcessBuilder processBuilderRm = new ProcessBuilder(dockerArgsRm);
+                processBuilderRm.command().add(0, dockerCommand);
+                processBuilderRm.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
+                Process processRm = processBuilderRm.start();
+                processRm.waitFor(); // Aguarda o término do processo de remoção
+        
+                int exitCodeRm = processRm.exitValue();
+        
+                if (exitCodeRm == 0) {
+                    System.out.println("Contêiner removido com sucesso.");
+                } else {
+                    System.err.println("Erro ao remover o contêiner. Código de saída: " + exitCodeRm);
+                }
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void createContainer(Patient newPaciente) {
@@ -147,6 +200,7 @@ public class ControllerView implements Initializable {
             processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o
                                         // processo Docker
             processBuilder.start();
+            idContainersList.add(containerName);
 
         } catch (IOException e) {
             e.printStackTrace();
