@@ -1,5 +1,7 @@
 package br.unesp.rc.shhc.dashboard;
 
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -7,7 +9,6 @@ import java.util.ResourceBundle;
 
 import br.unesp.rc.shhc.SHHCPacientModel.model.Patient;
 import br.unesp.rc.shhc.SHHCPacientModel.repository.PatientRepository;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,6 +37,16 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.application.Platform;
+
+import br.unesp.rc.shhc.SHHCModel.model.AirFlow;
+import br.unesp.rc.shhc.SHHCModel.model.Glucose;
+import br.unesp.rc.shhc.SHHCModel.model.HeartRate;
+import br.unesp.rc.shhc.SHHCModel.model.PulseOxygen;
+import br.unesp.rc.shhc.SHHCModel.model.Temperature;
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 
 public class ControllerView implements Initializable {
 
@@ -52,10 +63,10 @@ public class ControllerView implements Initializable {
     private Button button_Add;
 
     @FXML
-    private Button button_Close;
+    private Label label_add;
 
     @FXML
-    private Label label_add;
+    private Button button_Close;
 
     @FXML
     private TabPane tabPaneSensors;
@@ -83,8 +94,8 @@ public class ControllerView implements Initializable {
 
     static Patient newPaciente = new Patient();
     ArrayList<String> titleList = new ArrayList<>();
-    ArrayList<Button> buttonsList = new ArrayList<>();
     ArrayList<String> idContainersList = new ArrayList<>();
+    ArrayList<Button> buttonsList = new ArrayList<>();
 
     public void onOpenDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewPatient.fxml"));
@@ -141,45 +152,45 @@ public class ControllerView implements Initializable {
             Platform.exit();
         });
     }
+
     private void cleanContainers() {
         for (String container : idContainersList) {
             try {
                 // Comando para parar o contêiner por ID
                 String dockerCommand = "docker";
-                String[] dockerArgsStop = { "stop", container };
-        
+                String[] dockerArgsStop = {"stop", container};
+
                 // Criação do processo para executar o comando Docker
                 ProcessBuilder processBuilderStop = new ProcessBuilder(dockerArgsStop);
                 processBuilderStop.command().add(0, dockerCommand);
                 processBuilderStop.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
                 Process processStop = processBuilderStop.start();
                 processStop.waitFor(); // Aguarda o término do processo de parada
-        
+
                 int exitCodeStop = processStop.exitValue();
-        
-                if (exitCodeStop == 0) {
+
+                /*if (exitCodeStop == 0) {
                     System.out.println("Contêiner parado com sucesso.");
                 } else {
                     System.err.println("Erro ao parar o contêiner. Código de saída: " + exitCodeStop);
-                }
-    
+                }*/
                 // Comando para remover o contêiner por ID
-                String[] dockerArgsRm = { "rm", container };
-        
+                String[] dockerArgsRm = {"rm", container};
+
                 // Criação do processo para executar o comando Docker
                 ProcessBuilder processBuilderRm = new ProcessBuilder(dockerArgsRm);
                 processBuilderRm.command().add(0, dockerCommand);
                 processBuilderRm.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
                 Process processRm = processBuilderRm.start();
                 processRm.waitFor(); // Aguarda o término do processo de remoção
-        
+
                 int exitCodeRm = processRm.exitValue();
-        
-                if (exitCodeRm == 0) {
+
+                /*if (exitCodeRm == 0) {
                     System.out.println("Contêiner removido com sucesso.");
                 } else {
                     System.err.println("Erro ao remover o contêiner. Código de saída: " + exitCodeRm);
-                }
+                }*/
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -192,13 +203,13 @@ public class ControllerView implements Initializable {
         System.out.println(port);
         try {
             String dockerCommand = "docker";
-            String[] dockerArgs = { "run", "-p", port, "--name", containerName, "shhcapi" };
+            String[] dockerArgs = {"run", "-p", port, "--name", containerName, "shhcapi"};
 
             // Criação do processo para executar o comando Docker
             ProcessBuilder processBuilder = new ProcessBuilder(dockerArgs);
             processBuilder.command().add(0, dockerCommand);
             processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o
-                                        // processo Docker
+            // processo Docker
             processBuilder.start();
             idContainersList.add(containerName);
 
@@ -366,14 +377,34 @@ public class ControllerView implements Initializable {
     public void tempAnalysis(int value, Pane patient) {
         Color color;
         Label labelTempe = (Label) patient.lookup("#labelTemp");
-        if (value >= 36 && value < 37) {
+        Temperature t1 = new Temperature();
+        t1.setValue(value);
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession kSession = kContainer.newKieSession("ksession-rulesTemperature");
+        try {
+            // load up the knowledge base
+            System.out.println("valor: " + value);
+            kSession.insert(t1);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            System.out.println("Mensagem: " + t.getMessage());
+            //t.printStackTrace();
+        }
+        labelTempe.setText(t1.getClazz());
+        color = Color.web("#e3fbe3");
+        Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+        patient.setBackground(background);
+        labelTempe.setTextFill(Color.web("#4fe40b"));
+        
+        /*if (value >= 36 && value < 37) {
             color = Color.web("#e3fbe3");
             Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
             patient.setBackground(background);
             labelTempe.setText("Normal");
             labelTempe.setTextFill(Color.web("#4fe40b"));
         } else if (value >= 37 && value < 38) {
-            color = Color.web("#ffffe0");
+                       color = Color.web("#ffffe0");
             Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
             patient.setBackground(background);
             labelTempe.setText("Febril");
@@ -402,6 +433,103 @@ public class ControllerView implements Initializable {
             patient.setBackground(background);
             labelTempe.setText("ERRO");
             labelTempe.setTextFill(Color.web("#000000"));
-        }
+        }*/
     }
+    
+    public void heartRateAnalysis(int value, Pane patient) {
+        Color color;
+        Label labelHeartRate = (Label) patient.lookup("#labelHeartRate");
+        HeartRate h1 = new HeartRate();
+        h1.setValue(value);
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession kSession = kContainer.newKieSession("ksession-rulesHeartRate");
+        try {
+            // load up the knowledge base
+            System.out.println("valor: " + value);
+            kSession.insert(h1);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            System.out.println("Mensagem: " + t.getMessage());
+            //t.printStackTrace();
+        }
+        labelHeartRate.setText(h1.getClazz());
+        color = Color.web("#e3fbe3");
+        Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+        patient.setBackground(background);
+        labelHeartRate.setTextFill(Color.web("#4fe40b"));
+    }
+    
+    public void glucoseAnalysis(int value, Pane patient) {
+        Color color;
+        Label labelGlucose = (Label) patient.lookup("#labelGlucose");
+        Glucose g1 = new Glucose();
+        g1.setValue(value);
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession kSession = kContainer.newKieSession("ksession-rulesGlucose");
+        try {
+            // load up the knowledge base
+            System.out.println("valor: " + value);
+            kSession.insert(g1);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            System.out.println("Mensagem: " + t.getMessage());
+            //t.printStackTrace();
+        }
+        labelGlucose.setText(g1.getClazz());
+        color = Color.web("#e3fbe3");
+        Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+        patient.setBackground(background);
+        labelGlucose.setTextFill(Color.web("#4fe40b"));
+    }
+    
+    public void pulseOxygenAnalysis(int value, Pane patient) {
+        Color color;
+        Label labelOxygen = (Label) patient.lookup("#labelOxygen");
+        PulseOxygen o1 = new PulseOxygen();
+        o1.setValue(value);
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession kSession = kContainer.newKieSession("ksession-rulesPulseOxygen");
+        try {
+            // load up the knowledge base
+            System.out.println("valor: " + value);
+            kSession.insert(o1);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            System.out.println("Mensagem: " + t.getMessage());
+            //t.printStackTrace();
+        }
+        labelOxygen.setText(o1.getClazz());
+        color = Color.web("#e3fbe3");
+        Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+        patient.setBackground(background);
+        labelOxygen.setTextFill(Color.web("#4fe40b"));
+    }
+    
+    public void airFlowAnalysis(int value, Pane patient) {
+        Color color;
+        Label labelAirFlow = (Label) patient.lookup("#labelAirFlow");
+        AirFlow a1 = new AirFlow();
+        a1.setValue(value);
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession kSession = kContainer.newKieSession("ksession-rulesAirFlow");
+        try {
+            // load up the knowledge base
+            System.out.println("valor: " + value);
+            kSession.insert(a1);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            System.out.println("Mensagem: " + t.getMessage());
+            //t.printStackTrace();
+        }
+        labelAirFlow.setText(a1.getClazz());
+        color = Color.web("#e3fbe3");
+        Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+        patient.setBackground(background);
+        labelAirFlow.setTextFill(Color.web("#4fe40b"));
+    }
+    
 }

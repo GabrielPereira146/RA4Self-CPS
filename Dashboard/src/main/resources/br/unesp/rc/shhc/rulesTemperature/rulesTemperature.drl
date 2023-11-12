@@ -1,0 +1,38 @@
+package exemplo.rules
+
+import br.unesp.rc.shhc.SHHCModel.model.Temperature;
+
+rule "Temperatura-Normal"
+    when
+        temp : Temperature(value >= 36 && value < 37)
+    then
+        temp.setClazz("Normal");
+end
+
+rule "Temperatura-Febril"
+    when
+        temp : Temperature(value >= 37 && value < 38)
+     then
+        temp.setClazz("Febril");
+end
+
+rule "Temperatura-Febre"
+    when
+        temp : Temperature(value >= 38 && value < 39)
+    then
+        temp.setClazz("Febre");
+end
+
+rule "Temperatura-Febre-Alta"
+    when
+        temp : Temperature(value >= 39 && value < 40)
+    then
+        temp.setClazz("Febre alta");
+end
+
+rule "Temperatura-Febre-Muito-Alta"
+    when
+        temp : Temperature(value >= 40 && value < 42)
+    then
+        temp.setClazz("Febre muito alta");
+end

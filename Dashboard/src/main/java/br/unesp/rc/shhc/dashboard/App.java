@@ -1,5 +1,6 @@
 package br.unesp.rc.shhc.dashboard;
 
+import br.unesp.rc.shhc.SHHCModel.model.Temperature;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 /**
  * JavaFX App
  */
@@ -36,5 +40,4 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }

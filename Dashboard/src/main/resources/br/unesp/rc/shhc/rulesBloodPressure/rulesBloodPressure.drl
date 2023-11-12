@@ -1,0 +1,11 @@
+package exemplo.rules
+
+import br.unesp.rc.shhc.SHHCModel.model.BloodPressure;
+
+rule "BloodPressure-Normal"
+    when
+        blood : BloodPressure(value >= 36 && value < 37)
+    then
+        blood.setClazz("Normal");
+end
+

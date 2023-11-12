@@ -1,0 +1,24 @@
+package exemplo.rules
+
+import br.unesp.rc.shhc.SHHCModel.model.HeartRate;
+
+rule "HeartRate-Bradicardia"
+    when
+        heartR : HeartRate(value >= 40 && value < 60)
+    then
+        heartR.setClazz("Bradicardia");
+end
+
+rule "HeartRate-Normal"
+    when
+        heartR : HeartRate(value >= 60 && value < 101)
+    then
+        heartR.setClazz("Normal");
+end
+
+rule "HeartRate-Taquicardia"
+    when
+        heartR : HeartRate(value >= 101 && value < 200)
+    then
+        heartR.setClazz("Taquicardia");
+end

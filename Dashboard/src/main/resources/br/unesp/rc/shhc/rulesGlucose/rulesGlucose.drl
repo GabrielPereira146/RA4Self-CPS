@@ -1,0 +1,24 @@
+package exemplo.rules
+
+import br.unesp.rc.shhc.SHHCModel.model.Glucose;
+
+rule "Glucose-Normal"
+    when
+        glu : Glucose(value >= 70 && value < 100)
+    then
+        glu.setClazz("Normal");
+end
+
+rule "Glucose-Alta/PreDiabetes"
+    when
+        glu : Glucose(value >= 100 && value < 126)
+    then
+        glu.setClazz("Alta/PreDiabetes");
+end
+
+rule "Glucose-Diabetes"
+    when
+        glu : Glucose(value >= 126 && value < 400)
+    then
+        glu.setClazz("Diabetes");
+end

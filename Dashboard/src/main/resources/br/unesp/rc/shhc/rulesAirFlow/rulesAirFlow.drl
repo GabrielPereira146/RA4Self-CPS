@@ -1,0 +1,31 @@
+package exemplo.rules
+
+import br.unesp.rc.shhc.SHHCModel.model.AirFlow;
+
+rule "AirFlow-Normal"
+    when
+        air : AirFlow(value >= 6 && value < 9)
+    then
+        air.setClazz("Normal");
+end
+
+rule "AirFlow-Levemente-Acelerado"
+    when
+        air : AirFlow(value >= 9 && value < 11)
+     then
+        air : AirFlow("Levemente Acelerado");
+end
+
+rule "AirFlow-Acelerado"
+    when
+        air : AirFlow(value >= 11 && value < 12)
+     then
+        air : AirFlow("Acelerado");
+end
+
+rule "AirFlow-Muito-Acelerado"
+    when
+        air : AirFlow(value >= 12 && value < 14)
+     then
+        air : AirFlow("Muito Acelerado");
+end
