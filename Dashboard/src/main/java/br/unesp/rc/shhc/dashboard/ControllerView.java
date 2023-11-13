@@ -135,12 +135,6 @@ public class ControllerView implements Initializable {
                     createContainer(newPaciente);
                     ControllerChart controllerChart = new ControllerChart(ControllerView.this);
                     controllerChart.initialize(newPaciente);
-                    // paneAir.setVisible(true);
-                    // paneBlood.setVisible(true);
-                    // paneGlucose.setVisible(true);
-                    // paneHeart.setVisible(true);
-                    // paneOxygen.setVisible(true);
-                    // paneTemp.setVisible(true);
                 }
 
             }
@@ -163,16 +157,8 @@ public class ControllerView implements Initializable {
                 Process processStop = processBuilderStop.start();
                 processStop.waitFor(); // Aguarda o término do processo de parada
 
-                int exitCodeStop = processStop.exitValue();
+                processStop.exitValue();
 
-                /*
-                 * if (exitCodeStop == 0) {
-                 * System.out.println("Contêiner parado com sucesso.");
-                 * } else {
-                 * System.err.println("Erro ao parar o contêiner. Código de saída: " +
-                 * exitCodeStop);
-                 * }
-                 */
                 // Comando para remover o contêiner por ID
                 String[] dockerArgsRm = { "rm", container };
 
@@ -184,16 +170,8 @@ public class ControllerView implements Initializable {
                 Process processRm = processBuilderRm.start();
                 processRm.waitFor(); // Aguarda o término do processo de remoção
 
-                int exitCodeRm = processRm.exitValue();
+                processRm.exitValue();
 
-                /*
-                 * if (exitCodeRm == 0) {
-                 * System.out.println("Contêiner removido com sucesso.");
-                 * } else {
-                 * System.err.println("Erro ao remover o contêiner. Código de saída: " +
-                 * exitCodeRm);
-                 * }
-                 */
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
