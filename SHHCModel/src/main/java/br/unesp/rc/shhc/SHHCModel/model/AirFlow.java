@@ -70,11 +70,17 @@ public class AirFlow implements Analyzable {
     public void applyRules(KieSession kSession) {
         kSession.insert(this);
         kSession.fireAllRules();
+        setResult(this.getClazz());
     }
 
     @Override
     public String getResult() {
         return result;
+    }
+
+    @Override
+    public void setResult(String result) {
+       this.result = result;
     }
 
 }

@@ -82,7 +82,7 @@ public class ControllerChart {
                     if(json != null){
                         temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
                         updateChart(temperature.getValue(), TempSeries);
-                        controller.tempAnalysis(temperature.getValue(), paciente.getListPane().get(0));
+                        controller.analysis(temperature, paciente.getListPane().get(0), "Temperature", "#labelTemp");//(temperature.getValue(), paciente.getListPane().get(0));
                         status = 0;
                     }
 
