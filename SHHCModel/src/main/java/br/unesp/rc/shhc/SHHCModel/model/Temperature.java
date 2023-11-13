@@ -1,14 +1,17 @@
 package br.unesp.rc.shhc.SHHCModel.model;
 
-public class Temperature {
+import org.kie.api.runtime.KieSession;
+
+public class Temperature implements Analyzable {
 
     //Attributes:
     private int value;
     private String status;
     private String ID;
     private String clazz;
+    private String result;
 
-    public Temperature() {
+    public Temperature () {
     }
 
     public Temperature(int value, String status, String ID) {
@@ -53,6 +56,17 @@ public class Temperature {
     @Override
     public String toString() {
         return "Temperature{" + "value=" + value + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
+    }
+
+    @Override
+    public void applyRules(KieSession kSession) {
+        kSession.insert(this);
+        kSession.fireAllRules();
+    }
+
+    @Override
+    public String getResult() {
+        return result;
     }
 
 }

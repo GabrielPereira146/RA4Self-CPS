@@ -39,6 +39,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import br.unesp.rc.shhc.SHHCModel.model.AirFlow;
+import br.unesp.rc.shhc.SHHCModel.model.Analyzable;
 import br.unesp.rc.shhc.SHHCModel.model.Glucose;
 import br.unesp.rc.shhc.SHHCModel.model.HeartRate;
 import br.unesp.rc.shhc.SHHCModel.model.PulseOxygen;
@@ -354,6 +355,26 @@ public class ControllerView implements Initializable {
         }
     }
 
+    public void analysis(Analyzable analyzable, Pane patient, String sensor, String label) {
+        Color color;
+        Label labelResult = (Label) patient.lookup(label);
+
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession kSession = kContainer.newKieSession("ksession-rules" + sensor);
+
+        try {
+            analyzable.applyRules(kSession);
+        } catch (Throwable t) {
+            System.out.println("Mensagem: " + t.getMessage());
+        }
+
+        labelResult.setText(analyzable.getResult());
+        color = Color.web("#e3fbe3");
+        Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
+        patient.setBackground(background);
+        labelResult.setTextFill(Color.web("#4fe40b"));
+    }
 
     public void tempAnalysis(int value, Pane patient) {
         Color color;

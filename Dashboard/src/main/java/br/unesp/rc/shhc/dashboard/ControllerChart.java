@@ -81,6 +81,7 @@ public class ControllerChart {
                         temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
                         updateChart(temperature.getValue(), TempSeries);
                         controller.tempAnalysis(temperature.getValue(), paciente.getListPane().get(0));
+            
                     }
 
                     // Insere um novo ponto de dados na série de AirFlow

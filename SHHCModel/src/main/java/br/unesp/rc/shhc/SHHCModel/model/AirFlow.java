@@ -1,11 +1,14 @@
 package br.unesp.rc.shhc.SHHCModel.model;
 
-public class AirFlow {
+import org.kie.api.runtime.KieSession;
+
+public class AirFlow implements Analyzable {
 
     private int value;
     private String status;
     private String ID;
     private String clazz;
+    private String result;
 
     public AirFlow(int airflow, String status, String ID) {
         this.value = airflow;
@@ -62,5 +65,16 @@ public class AirFlow {
     public String toString() {
         return "AirFlow{" + "value=" + value + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
     }
-    
+
+    @Override
+    public void applyRules(KieSession kSession) {
+        kSession.insert(this);
+        kSession.fireAllRules();
+    }
+
+    @Override
+    public String getResult() {
+        return result;
+    }
+
 }
