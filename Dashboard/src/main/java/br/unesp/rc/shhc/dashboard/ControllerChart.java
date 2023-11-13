@@ -60,6 +60,7 @@ public class ControllerChart {
                     if(json != null){
                         pulseOxygen = (PulseOxygen) GsonUtils.jsonToObject(json, PulseOxygen.class);
                         updateChart(pulseOxygen.getValue(), PulseOSeries);
+                        controller.pulseOxygenAnalysis(pulseOxygen.getValue(), paciente.getListPane().get(3));
                         status = 0;
                     }
                     
@@ -70,6 +71,7 @@ public class ControllerChart {
                     if(json != null){
                         heartRate = (HeartRate) GsonUtils.jsonToObject(json, HeartRate.class);
                         updateChart(heartRate.getValue(), HeartRSeries);
+                        controller.heartRateAnalysis(heartRate.getValue(), paciente.getListPane().get(1));
                         status = 0;
                     }
                     
@@ -81,7 +83,7 @@ public class ControllerChart {
                         temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
                         updateChart(temperature.getValue(), TempSeries);
                         controller.tempAnalysis(temperature.getValue(), paciente.getListPane().get(0));
-            
+                        status = 0;
                     }
 
                     // Insere um novo ponto de dados na série de AirFlow
@@ -91,6 +93,7 @@ public class ControllerChart {
                     if(json != null){
                        airFlow = (AirFlow) GsonUtils.jsonToObject(json, AirFlow.class);
                        updateChart(airFlow.getValue(), AirSeries);
+                       controller.airFlowAnalysis(airFlow.getValue(), paciente.getListPane().get(4));
                        status = 0;
                     }
 
@@ -101,6 +104,7 @@ public class ControllerChart {
                      if(json != null){
                         glucose = (Glucose) GsonUtils.jsonToObject(json, Glucose.class);
                         updateChart(glucose.getValue(), GlucoseSeries);
+                        controller.glucoseAnalysis(glucose.getValue(), paciente.getListPane().get(2));
                         status = 0;
                     }
 
