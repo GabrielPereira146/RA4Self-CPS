@@ -18,7 +18,9 @@ import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -46,6 +48,20 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 public class ControllerView implements Initializable {
+
+    private void fecharJanela(ActionEvent event) {
+        // Obtém a janela associada ao evento
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+        // Exibe uma mensagem de confirmação
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tem certeza que deseja fechar a aplicação?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        // Se o usuário clicar em "Sim", fecha a janela
+        if (alert.getResult() == ButtonType.YES) {
+            stage.close();
+        }
+    }
 
     @FXML
     private AnchorPane Anchor_Pac;
