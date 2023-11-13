@@ -102,7 +102,6 @@
                       </Tab>
                     </tabs>
                   </TabPane>
-                  <Button fx:id="button_Close" layoutX="866.0" layoutY="752.0" mnemonicParsing="false" text="Close" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
         </children>
       </AnchorPane>
             <SplitPane dividerPositions="0.8" maxWidth="265.0" minHeight="430.0" minWidth="265.0" mouseTransparent="true" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="200.0" prefWidth="265.0">
@@ -168,35 +167,35 @@
                                              <children>
                                                 <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Heart Rate" textAlignment="CENTER" />
                                                 <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                                <Label fx:id="labelHeartRate" layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
                                              </children>
                                           </Pane>
                                           <Pane fx:id="paneGlucose" layoutX="2.0" layoutY="65.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
                                              <children>
                                                 <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Glucose" textAlignment="CENTER" />
                                                 <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                                <Label fx:id="labelGlucose" layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
                                              </children>
                                           </Pane>
                                           <Pane fx:id="paneOxygen" layoutX="140.0" layoutY="65.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
                                              <children>
                                                 <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="85.0" text="Pulse Oxygen" textAlignment="CENTER" />
                                                 <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                                <Label fx:id="labelOxygen" layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
                                              </children>
                                           </Pane>
                                           <Pane fx:id="paneAir" layoutX="2.0" layoutY="120.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
                                              <children>
                                                 <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="68.0" text="Air Flow" textAlignment="CENTER" />
                                                 <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                                <Label fx:id="labelAirFlow" layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
                                              </children>
                                           </Pane>
                                           <Pane fx:id="paneBlood" layoutX="140.0" layoutY="120.0" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 5;" visible="false">
                                              <children>
                                                 <Label layoutX="4.0" layoutY="2.0" prefHeight="17.0" prefWidth="85.0" text="Blood Pressure" textAlignment="CENTER" />
                                                 <Label layoutX="6.0" layoutY="22.0" prefHeight="17.0" prefWidth="48.0" text="Status" textAlignment="CENTER" />
-                                                <Label layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
+                                                <Label fx:id="labelBloodPress" layoutX="45.0" layoutY="22.0" prefHeight="17.0" prefWidth="80.0" text="Normal" textAlignment="CENTER" textFill="#4fe40b" />
                                              </children>
                                           </Pane>
                                        </children>

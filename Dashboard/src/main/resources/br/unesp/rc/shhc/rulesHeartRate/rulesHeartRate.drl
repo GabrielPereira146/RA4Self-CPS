@@ -1,4 +1,4 @@
-package exemplo.rules
+package br.unesp.rc.shhc.dashboard;
 
 import br.unesp.rc.shhc.SHHCModel.model.HeartRate;
 

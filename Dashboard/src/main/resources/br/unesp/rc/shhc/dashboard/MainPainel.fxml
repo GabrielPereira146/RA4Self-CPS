@@ -102,7 +102,6 @@
                       </Tab>
                     </tabs>
                   </TabPane>
-                  <Button fx:id="button_Close" layoutX="866.0" layoutY="752.0" mnemonicParsing="false" text="Close" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
         </children>
       </AnchorPane>
             <SplitPane dividerPositions="0.8" maxWidth="265.0" minHeight="430.0" minWidth="265.0" mouseTransparent="true" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="200.0" prefWidth="265.0">

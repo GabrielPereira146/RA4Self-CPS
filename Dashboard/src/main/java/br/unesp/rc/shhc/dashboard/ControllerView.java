@@ -1,8 +1,6 @@
 package br.unesp.rc.shhc.dashboard;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -37,7 +35,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.application.Platform;
 
 import br.unesp.rc.shhc.SHHCModel.model.AirFlow;
 import br.unesp.rc.shhc.SHHCModel.model.Glucose;
@@ -136,24 +133,14 @@ public class ControllerView implements Initializable {
                     createContainer(newPaciente);
                     ControllerChart controllerChart = new ControllerChart(ControllerView.this);
                     controllerChart.initialize(newPaciente);
-                    // paneAir.setVisible(true);
-                    // paneBlood.setVisible(true);
-                    // paneGlucose.setVisible(true);
-                    // paneHeart.setVisible(true);
-                    // paneOxygen.setVisible(true);
-                    // paneTemp.setVisible(true);
                 }
 
             }
 
         });
-        button_Close.setOnAction(e -> {
-            cleanContainers();
-            Platform.exit();
-        });
     }
 
-    private void cleanContainers() {
+    public void cleanContainers() {
         for (String container : idContainersList) {
             try {
                 // Comando para parar o contêiner por ID
@@ -168,16 +155,7 @@ public class ControllerView implements Initializable {
                 Process processStop = processBuilderStop.start();
                 processStop.waitFor(); // Aguarda o término do processo de parada
 
-                int exitCodeStop = processStop.exitValue();
-
-                /*
-                 * if (exitCodeStop == 0) {
-                 * System.out.println("Contêiner parado com sucesso.");
-                 * } else {
-                 * System.err.println("Erro ao parar o contêiner. Código de saída: " +
-                 * exitCodeStop);
-                 * }
-                 */
+                processStop.exitValue();
                 // Comando para remover o contêiner por ID
                 String[] dockerArgsRm = { "rm", container };
 
@@ -189,16 +167,8 @@ public class ControllerView implements Initializable {
                 Process processRm = processBuilderRm.start();
                 processRm.waitFor(); // Aguarda o término do processo de remoção
 
-                int exitCodeRm = processRm.exitValue();
+                processRm.exitValue();
 
-                /*
-                 * if (exitCodeRm == 0) {
-                 * System.out.println("Contêiner removido com sucesso.");
-                 * } else {
-                 * System.err.println("Erro ao remover o contêiner. Código de saída: " +
-                 * exitCodeRm);
-                 * }
-                 */
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -382,40 +352,6 @@ public class ControllerView implements Initializable {
         }
     }
 
-    public void sensorsAnalysis(Object sensor, int value, Pane patient, String kSessionName) {
-
-         // Use reflexão para chamar o método setValue no objeto sensor
-        try {
-            Method setValueMethod = sensor.getClass().getMethod("setValue", int.class);
-            setValueMethod.invoke(sensor, value);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-            // Lidar com exceções adequadamente
-        }
-
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kContainer = ks.getKieClasspathContainer();
-        KieSession kSession = kContainer.newKieSession("ksession-" + kSessionName);
-        try {
-            // load up the knowledge base
-            System.out.println("valor: " + value);
-            kSession.insert(sensor);
-            kSession.fireAllRules();
-        } catch (Throwable t) {
-            System.out.println("Mensagem: " + t.getMessage());
-            // t.printStackTrace();
-        }
-
-        // Use reflexão para chamar o método getValueMethodName no objeto sensor
-         try {
-            Method getValueMethod = sensor.getClass().getMethod("getClazz");
-            System.out.println((String) getValueMethod.invoke(sensor));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-            // Lidar com exceções adequadamente
-        }
-
-    }
 
     public void tempAnalysis(int value, Pane patient) {
         Color color;
