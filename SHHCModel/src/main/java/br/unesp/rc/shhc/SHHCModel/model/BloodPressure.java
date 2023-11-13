@@ -6,7 +6,8 @@ public class BloodPressure {
     private int systolicValue;
     private String status;
     private String ID;
-
+    private String clazz;
+    
     public BloodPressure(int diastolicValue, int systolicValue, String status, String ID) {
         this.diastolicValue = diastolicValue;
         this.systolicValue = systolicValue;
@@ -62,8 +63,18 @@ public class BloodPressure {
         this.ID = ID;
     }
 
+    public String getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
+    }
+
     @Override
     public String toString() {
-        return "diastolicValue = " + diastolicValue + ", systolicValue = " + systolicValue + ", status = " + status + ", ID = " + ID;
+        return "BloodPressure{" + "diastolicValue=" + diastolicValue + ", systolicValue=" + systolicValue + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
     }
+
+
 }

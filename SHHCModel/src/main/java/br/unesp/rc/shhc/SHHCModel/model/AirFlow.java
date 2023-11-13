@@ -5,6 +5,7 @@ public class AirFlow {
     private int value;
     private String status;
     private String ID;
+    private String clazz;
 
     public AirFlow(int airflow, String status, String ID) {
         this.value = airflow;
@@ -49,8 +50,17 @@ public class AirFlow {
         this.ID = ID;
     }
 
+    public String getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
+    }
+
     @Override
     public String toString() {
-        return "value = " + value + ", status = " + status + ", ID = " + ID;
+        return "AirFlow{" + "value=" + value + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
     }
+    
 }

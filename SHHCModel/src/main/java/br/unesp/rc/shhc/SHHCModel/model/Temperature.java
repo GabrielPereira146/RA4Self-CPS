@@ -6,6 +6,7 @@ public class Temperature {
     private int value;
     private String status;
     private String ID;
+    private String clazz;
 
     public Temperature() {
     }
@@ -41,9 +42,17 @@ public class Temperature {
         this.ID = ID;
     }
 
+    public String getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
+    }
+    
     @Override
     public String toString() {
-        return "Temperature{" + "value=" + this.value + ", status=" + this.status + ", ID=" + this.ID + '}';
+        return "Temperature{" + "value=" + value + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
     }
 
 }

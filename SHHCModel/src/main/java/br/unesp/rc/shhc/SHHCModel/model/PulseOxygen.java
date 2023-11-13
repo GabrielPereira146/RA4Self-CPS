@@ -5,6 +5,7 @@ public class PulseOxygen {
     private int value;
     private String status;
     private String ID;
+    private String clazz;
 
     public PulseOxygen(int value, String status, String ID) {
         this.value = value;
@@ -49,8 +50,17 @@ public class PulseOxygen {
         this.ID = ID;
     }
 
+    public String getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
+    }
+
     @Override
     public String toString() {
-        return "value = " + value + ", status = " + status + ", ID = " + ID;
+        return "PulseOxygen{" + "value=" + value + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
     }
+
 }
