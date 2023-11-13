@@ -1,8 +1,8 @@
 package br.unesp.rc.shhc.dashboard;
 
-
-
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -158,39 +158,47 @@ public class ControllerView implements Initializable {
             try {
                 // Comando para parar o contêiner por ID
                 String dockerCommand = "docker";
-                String[] dockerArgsStop = {"stop", container};
+                String[] dockerArgsStop = { "stop", container };
 
                 // Criação do processo para executar o comando Docker
                 ProcessBuilder processBuilderStop = new ProcessBuilder(dockerArgsStop);
                 processBuilderStop.command().add(0, dockerCommand);
-                processBuilderStop.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
+                processBuilderStop.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java
+                                                // para o processo Docker
                 Process processStop = processBuilderStop.start();
                 processStop.waitFor(); // Aguarda o término do processo de parada
 
                 int exitCodeStop = processStop.exitValue();
 
-                /*if (exitCodeStop == 0) {
-                    System.out.println("Contêiner parado com sucesso.");
-                } else {
-                    System.err.println("Erro ao parar o contêiner. Código de saída: " + exitCodeStop);
-                }*/
+                /*
+                 * if (exitCodeStop == 0) {
+                 * System.out.println("Contêiner parado com sucesso.");
+                 * } else {
+                 * System.err.println("Erro ao parar o contêiner. Código de saída: " +
+                 * exitCodeStop);
+                 * }
+                 */
                 // Comando para remover o contêiner por ID
-                String[] dockerArgsRm = {"rm", container};
+                String[] dockerArgsRm = { "rm", container };
 
                 // Criação do processo para executar o comando Docker
                 ProcessBuilder processBuilderRm = new ProcessBuilder(dockerArgsRm);
                 processBuilderRm.command().add(0, dockerCommand);
-                processBuilderRm.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o processo Docker
+                processBuilderRm.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para
+                                              // o processo Docker
                 Process processRm = processBuilderRm.start();
                 processRm.waitFor(); // Aguarda o término do processo de remoção
 
                 int exitCodeRm = processRm.exitValue();
 
-                /*if (exitCodeRm == 0) {
-                    System.out.println("Contêiner removido com sucesso.");
-                } else {
-                    System.err.println("Erro ao remover o contêiner. Código de saída: " + exitCodeRm);
-                }*/
+                /*
+                 * if (exitCodeRm == 0) {
+                 * System.out.println("Contêiner removido com sucesso.");
+                 * } else {
+                 * System.err.println("Erro ao remover o contêiner. Código de saída: " +
+                 * exitCodeRm);
+                 * }
+                 */
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -203,7 +211,7 @@ public class ControllerView implements Initializable {
         System.out.println(port);
         try {
             String dockerCommand = "docker";
-            String[] dockerArgs = {"run", "-p", port, "--name", containerName, "shhcapi"};
+            String[] dockerArgs = { "run", "-p", port, "--name", containerName, "shhcapi" };
 
             // Criação do processo para executar o comando Docker
             ProcessBuilder processBuilder = new ProcessBuilder(dockerArgs);
@@ -374,6 +382,41 @@ public class ControllerView implements Initializable {
         }
     }
 
+    public void sensorsAnalysis(Object sensor, int value, Pane patient, String kSessionName) {
+
+         // Use reflexão para chamar o método setValue no objeto sensor
+        try {
+            Method setValueMethod = sensor.getClass().getMethod("setValue", int.class);
+            setValueMethod.invoke(sensor, value);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+            // Lidar com exceções adequadamente
+        }
+
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession kSession = kContainer.newKieSession("ksession-" + kSessionName);
+        try {
+            // load up the knowledge base
+            System.out.println("valor: " + value);
+            kSession.insert(sensor);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            System.out.println("Mensagem: " + t.getMessage());
+            // t.printStackTrace();
+        }
+
+        // Use reflexão para chamar o método getValueMethodName no objeto sensor
+         try {
+            Method getValueMethod = sensor.getClass().getMethod("getClazz");
+            System.out.println((String) getValueMethod.invoke(sensor));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+            // Lidar com exceções adequadamente
+        }
+
+    }
+
     public void tempAnalysis(int value, Pane patient) {
         Color color;
         Label labelTempe = (Label) patient.lookup("#labelTemp");
@@ -389,53 +432,61 @@ public class ControllerView implements Initializable {
             kSession.fireAllRules();
         } catch (Throwable t) {
             System.out.println("Mensagem: " + t.getMessage());
-            //t.printStackTrace();
+            // t.printStackTrace();
         }
         labelTempe.setText(t1.getClazz());
         color = Color.web("#e3fbe3");
         Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
         patient.setBackground(background);
         labelTempe.setTextFill(Color.web("#4fe40b"));
-        
-        /*if (value >= 36 && value < 37) {
-            color = Color.web("#e3fbe3");
-            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            patient.setBackground(background);
-            labelTempe.setText("Normal");
-            labelTempe.setTextFill(Color.web("#4fe40b"));
-        } else if (value >= 37 && value < 38) {
-                       color = Color.web("#ffffe0");
-            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            patient.setBackground(background);
-            labelTempe.setText("Febril");
-            labelTempe.setTextFill(Color.web("#ffbf00"));
-        } else if (value >= 38 && value < 39) {
-            color = Color.web("#ffe0b5");
-            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            patient.setBackground(background);
-            labelTempe.setText("Febre");
-            labelTempe.setTextFill(Color.web("#ff8c00"));
-        } else if (value >= 39 && value < 40) {
-            color = Color.web("#ffd8d4");
-            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            patient.setBackground(background);
-            labelTempe.setText("Febre alta");
-            labelTempe.setTextFill(Color.web("#ff0000"));
-        } else if (value >= 40 && value < 42) {
-            color = Color.web("#e0bcdd");
-            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            patient.setBackground(background);
-            labelTempe.setText("Febre altissima");
-            labelTempe.setTextFill(Color.web("#993399"));
-        } else {
-            color = Color.web("#ffffff");
-            Background background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
-            patient.setBackground(background);
-            labelTempe.setText("ERRO");
-            labelTempe.setTextFill(Color.web("#000000"));
-        }*/
+
+        /*
+         * if (value >= 36 && value < 37) {
+         * color = Color.web("#e3fbe3");
+         * Background background = new Background(new BackgroundFill(color, new
+         * CornerRadii(5), null));
+         * patient.setBackground(background);
+         * labelTempe.setText("Normal");
+         * labelTempe.setTextFill(Color.web("#4fe40b"));
+         * } else if (value >= 37 && value < 38) {
+         * color = Color.web("#ffffe0");
+         * Background background = new Background(new BackgroundFill(color, new
+         * CornerRadii(5), null));
+         * patient.setBackground(background);
+         * labelTempe.setText("Febril");
+         * labelTempe.setTextFill(Color.web("#ffbf00"));
+         * } else if (value >= 38 && value < 39) {
+         * color = Color.web("#ffe0b5");
+         * Background background = new Background(new BackgroundFill(color, new
+         * CornerRadii(5), null));
+         * patient.setBackground(background);
+         * labelTempe.setText("Febre");
+         * labelTempe.setTextFill(Color.web("#ff8c00"));
+         * } else if (value >= 39 && value < 40) {
+         * color = Color.web("#ffd8d4");
+         * Background background = new Background(new BackgroundFill(color, new
+         * CornerRadii(5), null));
+         * patient.setBackground(background);
+         * labelTempe.setText("Febre alta");
+         * labelTempe.setTextFill(Color.web("#ff0000"));
+         * } else if (value >= 40 && value < 42) {
+         * color = Color.web("#e0bcdd");
+         * Background background = new Background(new BackgroundFill(color, new
+         * CornerRadii(5), null));
+         * patient.setBackground(background);
+         * labelTempe.setText("Febre altissima");
+         * labelTempe.setTextFill(Color.web("#993399"));
+         * } else {
+         * color = Color.web("#ffffff");
+         * Background background = new Background(new BackgroundFill(color, new
+         * CornerRadii(5), null));
+         * patient.setBackground(background);
+         * labelTempe.setText("ERRO");
+         * labelTempe.setTextFill(Color.web("#000000"));
+         * }
+         */
     }
-    
+
     public void heartRateAnalysis(int value, Pane patient) {
         Color color;
         Label labelHeartRate = (Label) patient.lookup("#labelHeartRate");
@@ -451,7 +502,7 @@ public class ControllerView implements Initializable {
             kSession.fireAllRules();
         } catch (Throwable t) {
             System.out.println("Mensagem: " + t.getMessage());
-            //t.printStackTrace();
+            // t.printStackTrace();
         }
         labelHeartRate.setText(h1.getClazz());
         color = Color.web("#e3fbe3");
@@ -459,7 +510,7 @@ public class ControllerView implements Initializable {
         patient.setBackground(background);
         labelHeartRate.setTextFill(Color.web("#4fe40b"));
     }
-    
+
     public void glucoseAnalysis(int value, Pane patient) {
         Color color;
         Label labelGlucose = (Label) patient.lookup("#labelGlucose");
@@ -475,7 +526,7 @@ public class ControllerView implements Initializable {
             kSession.fireAllRules();
         } catch (Throwable t) {
             System.out.println("Mensagem: " + t.getMessage());
-            //t.printStackTrace();
+            // t.printStackTrace();
         }
         labelGlucose.setText(g1.getClazz());
         color = Color.web("#e3fbe3");
@@ -483,7 +534,7 @@ public class ControllerView implements Initializable {
         patient.setBackground(background);
         labelGlucose.setTextFill(Color.web("#4fe40b"));
     }
-    
+
     public void pulseOxygenAnalysis(int value, Pane patient) {
         Color color;
         Label labelOxygen = (Label) patient.lookup("#labelOxygen");
@@ -499,7 +550,7 @@ public class ControllerView implements Initializable {
             kSession.fireAllRules();
         } catch (Throwable t) {
             System.out.println("Mensagem: " + t.getMessage());
-            //t.printStackTrace();
+            // t.printStackTrace();
         }
         labelOxygen.setText(o1.getClazz());
         color = Color.web("#e3fbe3");
@@ -507,7 +558,7 @@ public class ControllerView implements Initializable {
         patient.setBackground(background);
         labelOxygen.setTextFill(Color.web("#4fe40b"));
     }
-    
+
     public void airFlowAnalysis(int value, Pane patient) {
         Color color;
         Label labelAirFlow = (Label) patient.lookup("#labelAirFlow");
@@ -523,7 +574,7 @@ public class ControllerView implements Initializable {
             kSession.fireAllRules();
         } catch (Throwable t) {
             System.out.println("Mensagem: " + t.getMessage());
-            //t.printStackTrace();
+            // t.printStackTrace();
         }
         labelAirFlow.setText(a1.getClazz());
         color = Color.web("#e3fbe3");
@@ -531,5 +582,5 @@ public class ControllerView implements Initializable {
         patient.setBackground(background);
         labelAirFlow.setTextFill(Color.web("#4fe40b"));
     }
-    
+
 }
