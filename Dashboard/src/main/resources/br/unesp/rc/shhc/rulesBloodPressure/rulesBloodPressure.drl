@@ -6,6 +6,6 @@ rule "BloodPressure-Normal"
     when
         blood : BloodPressure(value >= 36 && value < 37)
     then
-        blood.setClazz("Normal");
+        blood.setClazz("Normal",0);
 end
 

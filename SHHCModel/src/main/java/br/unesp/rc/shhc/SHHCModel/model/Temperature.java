@@ -4,14 +4,14 @@ import org.kie.api.runtime.KieSession;
 
 public class Temperature implements Analyzable {
 
-    //Attributes:
+    // Attributes:
     private int value;
     private String status;
     private String ID;
     private String clazz;
-    private String result;
+    private int idClazz;
 
-    public Temperature () {
+    public Temperature() {
     }
 
     public Temperature(int value, String status, String ID) {
@@ -45,14 +45,12 @@ public class Temperature implements Analyzable {
         this.ID = ID;
     }
 
+    @Override
     public String getClazz() {
         return clazz;
     }
 
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
-    }
-    
+
     @Override
     public String toString() {
         return "Temperature{" + "value=" + value + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
@@ -62,19 +60,17 @@ public class Temperature implements Analyzable {
     public void applyRules(KieSession kSession) {
         kSession.insert(this);
         kSession.fireAllRules();
-        setResult(this.getClazz());
     }
 
     @Override
-    public String getResult() {
-        return result;
+    public void setClazz(String clazz, int id) {
+       this.clazz = clazz;
+       this.idClazz = id;
     }
 
     @Override
-    public void setResult(String result) {
-       this.result = result;
+    public int getIdClazz() {
+       return idClazz;
     }
-
-
 
 }

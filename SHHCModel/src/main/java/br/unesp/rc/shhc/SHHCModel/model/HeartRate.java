@@ -1,11 +1,14 @@
 package br.unesp.rc.shhc.SHHCModel.model;
 
-public class HeartRate {
+import org.kie.api.runtime.KieSession;
+
+public class HeartRate implements Analyzable {
 
     private int value;
     private String status;
     private String ID;
     private String clazz;
+    private int idClazz;
 
     public HeartRate(int value, String status, String ID) {
         this.value = value;
@@ -50,17 +53,32 @@ public class HeartRate {
         this.ID = ID;
     }
 
+    @Override
     public String getClazz() {
         return clazz;
     }
 
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
-    }
 
     @Override
     public String toString() {
         return "HeartRate{" + "value=" + value + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
+    }
+
+    @Override
+    public void applyRules(KieSession kSession) {
+        kSession.insert(this);
+        kSession.fireAllRules();
+    }
+
+    @Override
+    public int getIdClazz() {
+       return idClazz;
+    }
+
+    @Override
+    public void setClazz(String clazz, int id) {
+        this.clazz = clazz;
+        this.idClazz = id;
     }
 
 }

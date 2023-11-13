@@ -60,7 +60,7 @@ public class ControllerChart {
                     if(json != null){
                         pulseOxygen = (PulseOxygen) GsonUtils.jsonToObject(json, PulseOxygen.class);
                         updateChart(pulseOxygen.getValue(), PulseOSeries);
-                        controller.pulseOxygenAnalysis(pulseOxygen.getValue(), paciente.getListPane().get(3));
+                        controller.analysis(pulseOxygen, paciente.getListPane().get(3), "PulseOxygen", "#labelOxygen");
                         status = 0;
                     }
                     
@@ -71,7 +71,7 @@ public class ControllerChart {
                     if(json != null){
                         heartRate = (HeartRate) GsonUtils.jsonToObject(json, HeartRate.class);
                         updateChart(heartRate.getValue(), HeartRSeries);
-                        controller.heartRateAnalysis(heartRate.getValue(), paciente.getListPane().get(1));
+                        controller.analysis(heartRate, paciente.getListPane().get(1), "HeartRate", "#labelHeartRate");
                         status = 0;
                     }
                     
@@ -82,7 +82,7 @@ public class ControllerChart {
                     if(json != null){
                         temperature = (Temperature) GsonUtils.jsonToObject(json, Temperature.class);
                         updateChart(temperature.getValue(), TempSeries);
-                        controller.analysis(temperature, paciente.getListPane().get(0), "Temperature", "#labelTemp");//(temperature.getValue(), paciente.getListPane().get(0));
+                        controller.analysis(temperature, paciente.getListPane().get(0), "Temperature", "#labelTemp");
                         status = 0;
                     }
 
@@ -93,7 +93,7 @@ public class ControllerChart {
                     if(json != null){
                        airFlow = (AirFlow) GsonUtils.jsonToObject(json, AirFlow.class);
                        updateChart(airFlow.getValue(), AirSeries);
-                       controller.airFlowAnalysis(airFlow.getValue(), paciente.getListPane().get(4));
+                       controller.analysis(airFlow, paciente.getListPane().get(4), "AirFlow", "#labelAirFlow");
                        status = 0;
                     }
 
@@ -104,7 +104,7 @@ public class ControllerChart {
                      if(json != null){
                         glucose = (Glucose) GsonUtils.jsonToObject(json, Glucose.class);
                         updateChart(glucose.getValue(), GlucoseSeries);
-                        controller.glucoseAnalysis(glucose.getValue(), paciente.getListPane().get(2));
+                        controller.analysis(glucose, paciente.getListPane().get(2), "Glucose", "#labelGlucose");
                         status = 0;
                     }
 

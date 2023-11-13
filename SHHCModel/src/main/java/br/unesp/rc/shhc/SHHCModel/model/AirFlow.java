@@ -8,7 +8,7 @@ public class AirFlow implements Analyzable {
     private String status;
     private String ID;
     private String clazz;
-    private String result;
+    private int idClazz;
 
     public AirFlow(int airflow, String status, String ID) {
         this.value = airflow;
@@ -53,13 +53,12 @@ public class AirFlow implements Analyzable {
         this.ID = ID;
     }
 
+    @Override
     public String getClazz() {
         return clazz;
     }
 
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
-    }
+
 
     @Override
     public String toString() {
@@ -70,17 +69,17 @@ public class AirFlow implements Analyzable {
     public void applyRules(KieSession kSession) {
         kSession.insert(this);
         kSession.fireAllRules();
-        setResult(this.getClazz());
     }
 
     @Override
-    public String getResult() {
-        return result;
+    public int getIdClazz() {
+        return idClazz;
     }
 
     @Override
-    public void setResult(String result) {
-       this.result = result;
+    public void setClazz(String clazz, int id) {
+       this.clazz = clazz;
+       this.idClazz = id;
     }
 
 }
