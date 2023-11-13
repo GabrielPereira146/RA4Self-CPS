@@ -49,20 +49,6 @@ import org.kie.api.runtime.KieSession;
 
 public class ControllerView implements Initializable {
 
-    private void fecharJanela(ActionEvent event) {
-        // Obtém a janela associada ao evento
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
-        // Exibe uma mensagem de confirmação
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tem certeza que deseja fechar a aplicação?", ButtonType.YES, ButtonType.NO);
-        alert.showAndWait();
-
-        // Se o usuário clicar em "Sim", fecha a janela
-        if (alert.getResult() == ButtonType.YES) {
-            stage.close();
-        }
-    }
-
     @FXML
     private AnchorPane Anchor_Pac;
 
