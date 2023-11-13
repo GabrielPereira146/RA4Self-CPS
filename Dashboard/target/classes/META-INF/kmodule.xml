@@ -1,6 +1,26 @@
 <kmodule xmlns="http://www.drools.org/xsd/kmodule">
-    <kbase name="exemplo" packages="exemplo.rules">
-        <ksession name="ksession1"/>
+    <kbase name="rulesTemperature" packages="br.unesp.rc.shhc.rulesTemperature">
+        <ksession name="ksession-rulesTemperature"/>
     </kbase>
+    
+    <kbase name="rulesHeartRate" packages="br.unesp.rc.shhc.rulesHeartRate">
+        <ksession name="ksession-rulesHeartRate"/>
+    </kbase>
+    
+    <kbase name="rulesPulseOxygen" packages="br.unesp.rc.shhc.rulesPulseOxygen">
+        <ksession name="ksession-rulesPulseOxygen"/>
+    </kbase>
+    
+    <kbase name="rulesAirFlow" packages="br.unesp.rc.shhc.rulesAirFlow">
+        <ksession name="ksession-rulesAirFlow"/>
+    </kbase>
+    
+    <kbase name="rulesGlucose" packages="br.unesp.rc.shhc.rulesGlucose">
+        <ksession name="ksession-rulesGlucose"/>
+    </kbase>
+    
+    <kbase name="rulesBloodPressure" packages="br.unesp.rc.shhc.rulesBloodPressure">
+        <ksession name="ksession-rulesBloodPressure"/>
+    </kbase>    
 </kmodule>
 
