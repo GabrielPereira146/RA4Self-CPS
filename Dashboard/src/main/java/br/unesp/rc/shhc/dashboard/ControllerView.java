@@ -35,14 +35,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.application.Platform;
 
-import br.unesp.rc.shhc.SHHCModel.model.AirFlow;
 import br.unesp.rc.shhc.SHHCModel.model.Analyzable;
-import br.unesp.rc.shhc.SHHCModel.model.Glucose;
-import br.unesp.rc.shhc.SHHCModel.model.HeartRate;
-import br.unesp.rc.shhc.SHHCModel.model.PulseOxygen;
-import br.unesp.rc.shhc.SHHCModel.model.Temperature;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
