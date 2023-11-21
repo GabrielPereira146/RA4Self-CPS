@@ -4,8 +4,21 @@ import br.unesp.rc.shhc.SHHCModel.model.BloodPressure;
 
 rule "BloodPressure-Normal"
     when
-        blood : BloodPressure(value >= 36 && value < 37)
+        blood : BloodPressure((systolicValue >= 11 && systolicValue <= 13) && (diastolicValue >= 7 && diastolicValue <= 9))
     then
-        blood.setClazz("Normal",0);
+        blood.setClazz("Normal", 1);
 end
 
+rule "BloodPressure-Alta"
+    when
+        blood : BloodPressure((systolicValue > 13 && systolicValue <= 15) && (diastolicValue >= 7 && diastolicValue <= 9))
+    then
+        blood.setClazz("Alta", 2);
+end
+
+rule "BloodPressure-Baixa"
+    when
+        blood : BloodPressure((systolicValue >= 11 && systolicValue <= 13) && (diastolicValue >= 5 && diastolicValue < 7))
+    then
+        blood.setClazz("Baixa", 3);
+end

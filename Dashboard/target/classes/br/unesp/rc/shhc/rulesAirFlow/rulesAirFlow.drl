@@ -6,26 +6,26 @@ rule "AirFlow-Normal"
     when
         air : AirFlow(value >= 6 && value < 9)
     then
-        air.setClazz("Normal", 0);
+        air.setClazz("Normal", 1);
 end
 
 rule "AirFlow-Levemente-Acelerado"
     when
         air : AirFlow(value >= 9 && value < 11)
      then
-        air.setClazz("Levemente Acelerado", 1);
+        air.setClazz("Levemente Acelerado", 2);
 end
 
 rule "AirFlow-Acelerado"
     when
         air : AirFlow(value >= 11 && value < 12)
      then
-        air.setClazz("Acelerado",2);
+        air.setClazz("Acelerado",3);
 end
 
 rule "AirFlow-Muito-Acelerado"
     when
         air : AirFlow(value >= 12 && value < 14)
      then
-        air.setClazz("Muito Acelerado",3);
+        air.setClazz("Muito Acelerado",4);
 end

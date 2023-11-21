@@ -368,31 +368,31 @@ public class ControllerView implements Initializable {
 
         Background background;
         switch (analyzable.getIdClazz()) {
-            case 0:
+            case 1:
                 color = Color.web("#e3fbe3");
                 background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
                 patient.setBackground(background);
                 labelResult.setTextFill(Color.web("#4fe40b"));
                 break;
-            case 1:
+            case 2:
                 color = Color.web("#ffffe0");
                 background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
                 patient.setBackground(background);
                 labelResult.setTextFill(Color.web("#ffbf00"));
                 break;
-            case 2:
+            case 3:
                 color = Color.web("#ffe0b5");
                 background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
                 patient.setBackground(background);
                 labelResult.setTextFill(Color.web("#ff8c00"));
                 break;
-            case 3:
+            case 4:
                 color = Color.web("#ffd8d4");
                 background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
                 patient.setBackground(background);
                 labelResult.setTextFill(Color.web("#ff0000"));
                 break;
-            case 4:
+            case 5:
                 color = Color.web("#e0bcdd");
                 background = new Background(new BackgroundFill(color, new CornerRadii(5), null));
                 patient.setBackground(background);

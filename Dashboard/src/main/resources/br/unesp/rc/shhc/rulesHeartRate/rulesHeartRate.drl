@@ -6,19 +6,19 @@ rule "HeartRate-Bradicardia"
     when
         heartR : HeartRate(value >= 40 && value < 60)
     then
-        heartR.setClazz("Bradicardia",2);
+        heartR.setClazz("Bradicardia",3);
 end
 
 rule "HeartRate-Normal"
     when
         heartR : HeartRate(value >= 60 && value < 101)
     then
-        heartR.setClazz("Normal",0);
+        heartR.setClazz("Normal",1);
 end
 
 rule "HeartRate-Taquicardia"
     when
         heartR : HeartRate(value >= 101 && value < 200)
     then
-        heartR.setClazz("Taquicardia",2);
+        heartR.setClazz("Taquicardia",3);
 end

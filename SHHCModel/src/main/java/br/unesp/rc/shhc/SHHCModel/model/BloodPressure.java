@@ -1,12 +1,15 @@
 package br.unesp.rc.shhc.SHHCModel.model;
 
-public class BloodPressure {
+import org.kie.api.runtime.KieSession;
+
+public class BloodPressure implements Analyzable {
 
     private int diastolicValue;
     private int systolicValue;
     private String status;
     private String ID;
     private String clazz;
+    private int idClazz;
     
     public BloodPressure(int diastolicValue, int systolicValue, String status, String ID) {
         this.diastolicValue = diastolicValue;
@@ -63,17 +66,31 @@ public class BloodPressure {
         this.ID = ID;
     }
 
+    @Override
     public String getClazz() {
         return clazz;
     }
 
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
+    @Override
+    public String toString() {
+        return "BloodPressure{" + "diastolicValue=" + diastolicValue + ", systolicValue=" + systolicValue + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + ", idClazz=" + idClazz + '}';
     }
 
     @Override
-    public String toString() {
-        return "BloodPressure{" + "diastolicValue=" + diastolicValue + ", systolicValue=" + systolicValue + ", status=" + status + ", ID=" + ID + ", clazz=" + clazz + '}';
+    public void applyRules(KieSession kSession) {
+        kSession.insert(this);
+        kSession.fireAllRules();
+    }
+
+    @Override
+    public void setClazz(String clazz, int id) {
+       this.clazz = clazz;
+       this.idClazz = id;
+    }
+
+    @Override
+    public int getIdClazz() {
+        return idClazz;
     }
 
 

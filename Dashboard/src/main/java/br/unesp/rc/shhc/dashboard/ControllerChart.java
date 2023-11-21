@@ -116,6 +116,7 @@ public class ControllerChart {
                         bloodPressure = (BloodPressure) GsonUtils.jsonToObject(json, BloodPressure.class);
                         updateChart(bloodPressure.getDiastolicValue(), BloodPDSeries);
                         updateChart(bloodPressure.getSystolicValue(), BloodPSSeries); 
+                        controller.analysis(bloodPressure, paciente.getListPane().get(5), "BloodPressure", "#labelBloodPress");
                         status = 0;
                     }
                     

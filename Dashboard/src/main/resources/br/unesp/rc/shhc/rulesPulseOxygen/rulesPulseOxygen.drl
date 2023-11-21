@@ -6,19 +6,19 @@ rule "PulseOxygen-Muito-Baixa"
     when
         oxy : PulseOxygen(value >= 75 && value < 90)
     then
-        oxy.setClazz("Muito Baixa",2);
+        oxy.setClazz("Muito Baixa",3);
 end
 
 rule "PulseOxygen-Baixa"
     when
         oxy : PulseOxygen(value >= 90 && value < 95)
     then
-        oxy.setClazz("Baixa",1);
+        oxy.setClazz("Baixa",2);
 end
 
 rule "PulseOxygen-Normal"
     when
         oxy : PulseOxygen(value >= 95 && value < 101)
     then
-        oxy.setClazz("Normal",0);
+        oxy.setClazz("Normal",1);
 end
