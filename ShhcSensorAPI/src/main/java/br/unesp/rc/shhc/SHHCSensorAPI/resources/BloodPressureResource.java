@@ -15,7 +15,7 @@ public class BloodPressureResource {
     private static BloodPressure BloodP;
 
     static {
-        BloodP = new BloodPressure(12, 8, "online", "3");
+        BloodP = new BloodPressure(8, 12, "online", "3");
     }
 
     @GetMapping("/")

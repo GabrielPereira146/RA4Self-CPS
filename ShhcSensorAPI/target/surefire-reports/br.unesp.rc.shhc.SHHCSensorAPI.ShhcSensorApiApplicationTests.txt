@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.unesp.rc.shhc.SHHCSensorAPI.ShhcSensorApiApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.488 s - in br.unesp.rc.shhc.SHHCSensorAPI.ShhcSensorApiApplicationTests
