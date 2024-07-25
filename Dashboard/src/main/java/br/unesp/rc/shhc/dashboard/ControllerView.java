@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import br.unesp.rc.shhc.SHHCPacientModel.dto.PatientDTO;
 import br.unesp.rc.shhc.SHHCPacientModel.model.Patient;
 import br.unesp.rc.shhc.SHHCPacientModel.repository.PatientRepository;
 import javafx.event.ActionEvent;
@@ -35,7 +36,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import br.unesp.rc.gson.utils.GsonUtils;
+import br.unesp.rc.httpclient.utils.CustomHttpClientUtils;
 import br.unesp.rc.shhc.SHHCModel.model.Analyzable;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -113,6 +115,7 @@ public class ControllerView implements Initializable {
         titleList.add("AirFlow");
         titleList.add("Glucose");
         titleList.add("BloodPressure");
+        startContainerNumberPatients();
 
         button_Add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -129,11 +132,64 @@ public class ControllerView implements Initializable {
                     createContainer(newPaciente);
                     ControllerChart controllerChart = new ControllerChart(ControllerView.this);
                     controllerChart.initialize(newPaciente);
+                    // addPatientData(newPaciente);
                 }
 
             }
 
         });
+    }
+
+    public void startContainerNumberPatients() {
+        try {
+            String dockerCommand = "docker";
+            String[] dockerArgs = { "run", "-p", "8080:8080", "--name", "NumberPatientsAPI", "numberapi" };
+
+            // Criação do processo para executar o comando Docker
+            ProcessBuilder processBuilder = new ProcessBuilder(dockerArgs);
+            processBuilder.command().add(0, dockerCommand);
+            processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o
+            // processo Docker
+            processBuilder.start();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setNumberPatients(int numberPatients){
+        String URL = "http://localhost:8080/shhc/update";
+
+        String json = GsonUtils.objetoToJson(numberPatients);
+
+        try {
+            CustomHttpClientUtils.setValueByHttpPut(URL, json);
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addPatientData(Patient patient){
+        String URL = "http://localhost:";
+
+        URL = URL + patient.getPort() + "/shhc/Patient/update";
+
+        System.out.println(URL);
+
+        // Transformando o objeto patient em um json
+        String json = GsonUtils.objetoToJson(patient.toDto());
+
+        try {
+
+            // Enviando dados para a API  
+            CustomHttpClientUtils.setValueByHttpPut(URL, json);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void cleanContainers() {
@@ -170,6 +226,38 @@ public class ControllerView implements Initializable {
                 e.printStackTrace();
             }
         }
+
+        try {
+            // Comando para parar o contêiner de número de pacientes na API
+            String dockerCommand = "docker";
+            String[] dockerArgsStop = { "stop", "NumberPatientsAPI"};
+
+            // Criação do processo para executar o comando Docker
+            ProcessBuilder processBuilderStop = new ProcessBuilder(dockerArgsStop);
+            processBuilderStop.command().add(0, dockerCommand);
+            processBuilderStop.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java
+                                            // para o processo Docker
+            Process processStop = processBuilderStop.start();
+            processStop.waitFor(); // Aguarda o término do processo de parada
+
+            processStop.exitValue();
+
+            // Comando para remover o contêiner de número de pacientes na API
+            String[] dockerArgsRm = { "rm", "NumberPatientsAPI" };
+
+            // Criação do processo para executar o comando Docker
+            ProcessBuilder processBuilderRm = new ProcessBuilder(dockerArgsRm);
+            processBuilderRm.command().add(0, dockerCommand);
+            processBuilderRm.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para
+                                          // o processo Docker
+            Process processRm = processBuilderRm.start();
+            processRm.waitFor(); // Aguarda o término do processo de remoção
+
+            processRm.exitValue();
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void createContainer(Patient newPaciente) {
@@ -186,6 +274,7 @@ public class ControllerView implements Initializable {
             processBuilder.inheritIO(); // Redireciona os streams de entrada e saída padrão do processo Java para o
             // processo Docker
             processBuilder.start();
+            setNumberPatients(newPaciente.getIdPaciente());
             idContainersList.add(containerName);
 
         } catch (IOException e) {

@@ -38,6 +38,11 @@
             <artifactId>SHHCModel</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>br.unesp.rc.shhc</groupId>
+            <artifactId>SHHCPacientModel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

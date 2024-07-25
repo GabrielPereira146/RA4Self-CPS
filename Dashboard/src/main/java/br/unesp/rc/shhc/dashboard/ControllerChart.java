@@ -43,6 +43,7 @@ public class ControllerChart {
         paciente.getListCharts().get(4).getData().add(GlucoseSeries);
         paciente.getListCharts().get(5).getData().add(BloodPDSeries);
         paciente.getListCharts().get(5).getData().add(BloodPSSeries);
+        
 
         // Cria o loop de atualização do gráfico
         AnimationTimer loop = new AnimationTimer() {
@@ -58,6 +59,7 @@ public class ControllerChart {
                     PulseOxygen pulseOxygen;
                     String json = CustomHttpClientUtils.getValueByHttp(url);//Pega o valor da API
                     if(json != null){
+                        ControllerChart.this.controller.addPatientData(paciente);
                         pulseOxygen = (PulseOxygen) GsonUtils.jsonToObject(json, PulseOxygen.class);
                         updateChart(pulseOxygen.getValue(), PulseOSeries);
                         controller.analysis(pulseOxygen, paciente.getListPane().get(3), "PulseOxygen", "#labelOxygen");

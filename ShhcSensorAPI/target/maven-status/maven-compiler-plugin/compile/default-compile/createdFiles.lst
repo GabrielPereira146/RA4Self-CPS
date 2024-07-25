@@ -1,8 +1,0 @@
-br\unesp\rc\shhc\SHHCSensorAPI\resources\AirFlowResource.class
-br\unesp\rc\shhc\SHHCSensorAPI\resources\TemperatureResource.class
-br\unesp\rc\shhc\SHHCSensorAPI\resources\PulseOxygenResource.class
-br\unesp\rc\shhc\SHHCSensorAPI\ShhcSensorApiApplication.class
-br\unesp\rc\shhc\SHHCSensorAPI\resources\BloodPressureResource.class
-br\unesp\rc\shhc\SHHCSensorAPI\resources\GlucoseResource.class
-br\unesp\rc\shhc\SHHCSensorAPI\filter\CustomFilter.class
-br\unesp\rc\shhc\SHHCSensorAPI\resources\HeartRateResource.class

@@ -13,12 +13,12 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>20.0.1</version>
+            <version>21.0.4</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>20.0.1</version>
+            <version>21.0.4</version>
         </dependency>
         <dependency>
             <groupId>br.unesp.rc.shhc</groupId>
@@ -32,7 +32,7 @@
         </dependency>
         <dependency>
             <groupId>br.unesp.rc</groupId>
-            <artifactId>HTTPClientUtils</artifactId>
+            <artifactId>HttpClientUtils</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

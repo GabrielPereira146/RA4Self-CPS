@@ -3,6 +3,7 @@ package br.unesp.rc.shhc.SHHCPacientModel.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unesp.rc.shhc.SHHCPacientModel.dto.PatientDTO;
 import javafx.scene.chart.LineChart;
 import javafx.scene.layout.Pane;
 import lombok.Data;
@@ -38,6 +39,21 @@ public class Patient {
     public String toString() {
         return "Patient [idPaciente=" + idPaciente + ", firstName=" + firstName + ", lastName=" + lastName + ", height="
                 + height + ", weight=" + weight + ", age=" + age + ", port=" + port + "]";
+    }
+
+    public PatientDTO toDto(){
+        PatientDTO patientDTO = new PatientDTO();
+
+        patientDTO.setIdPaciente(this.idPaciente);
+        patientDTO.setFirstName(this.firstName);
+        patientDTO.setLastName(this.lastName);
+        patientDTO.setPort(this.port);
+        patientDTO.setAge(this.age);
+        patientDTO.setHeight(this.height);
+        patientDTO.setWeight(this.weight);
+        
+        return patientDTO;
+
     }
 
 
